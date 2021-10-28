@@ -1,4 +1,4 @@
-#include "PreCompiled.h"
+#include <Precompiled.h>
 #include "WindowsApp.h"
 
 int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
@@ -10,11 +10,7 @@ int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	}
 
 	WindowsApp::Show(WindowsApp::g_Handle);
-	
-	while (WindowsApp::Tick())
-	{
-		//¼ÒÇÁÆ®¿þ¾î ·»´õ·¯ Æ½
-	}
+	WindowsApp::Tick();
 
 	WindowsApp::Destroy();
 	return 0;

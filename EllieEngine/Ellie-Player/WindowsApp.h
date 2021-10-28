@@ -1,5 +1,4 @@
 #pragma once
-
 struct ScreenPoint {
 	ScreenPoint(const int& InX, const int& InY)
 	{
@@ -16,6 +15,7 @@ namespace WindowsApp
 	static const TCHAR* g_ClassName = _T("Ellie Engine");
 	static ScreenPoint g_ScreenSize(0,0);
 	static TCHAR g_Title[64] = _T("Ellie Engine");
+	Dx11* m_Dx11;
 
 #pragma region WndProc
 	LRESULT CALLBACK WndProc(HWND hwnd, UINT32 msg, WPARAM wParam, LPARAM lParam)
@@ -94,32 +94,49 @@ namespace WindowsApp
 			return false;
 		}
 
-		return true;
+		//*DirectX11*//
+		m_Dx11 = new Dx11();
+		bool result = m_Dx11->Init(InScreenSize.X, InScreenSize.Y, false, g_Handle, false, 1000.f, 1.0f);
+		if (result == false)
+		{
+			::MessageBox(nullptr, _T("DirectX11 Init failed!"), _T("Error!"), MB_ICONEXCLAMATION | MB_OK);
+			return false;
+		}
 
+		return true;
 	}
 
 #pragma endregion
 
 #pragma region Tick
-	FORCEINLINE bool Tick()
+	FORCEINLINE void Tick()
 	{
 		MSG msg;
+		bool done = false;
 		::ZeroMemory(&msg, sizeof(msg));
 
-		while (::PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+		while (!done)
 		{
-			::TranslateMessage(&msg);
-			::DispatchMessage(&msg);
-
-			switch (msg.message)
+			if(::PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 			{
-			case WM_QUIT:
-				return false;
-				break;
+				::TranslateMessage(&msg);
+				::DispatchMessage(&msg);
+
+				switch (msg.message)
+				{
+				case WM_QUIT:
+					done = true;
+					break;
+				}
+			}
+			else
+			{
+				//m_Dx11->BeginScene(0.f,0.f,1.f,1.f);
+				//Game Update , Render
+				m_Dx11->Rendering();
+				//m_Dx11->EndScene();
 			}
 		}
-
-		return true;
 	}
 
 #pragma endregion
