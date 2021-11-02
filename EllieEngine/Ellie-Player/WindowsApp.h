@@ -143,7 +143,7 @@ namespace WindowsApp
 
 	void Destroy()
 	{
-		::DestroyWindow(g_Handle);
+		SAFE_DELETE(m_Dx11);
 	}
 	
 	void Show(HWND handle)

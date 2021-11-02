@@ -1,9 +1,12 @@
 #include "Precompiled.h"
 
-Dx11::Dx11() : m_Device(0), m_ImmediateContext(0), m_DepthStencilView(0), m_DepthDisabledStencilState(0), m_DepthStencilBuffer(0), m_DepthStencilState(0)
-, m_RasterState(0), m_RasterStateNoCulling(0), m_RenderTargetView(0),m_SwapChain(0),m_VideoCardMemory(0)
-, m_Vsync_Enabled(0) , m_EnableMsaa(0), m_4xMsaaQuality(0),m_ScreenHeight(0), m_ScreenWidth(0)
+Dx11::Dx11()
 {
+}
+
+Dx11::~Dx11()
+{
+	Release();
 }
 
 bool Dx11::Init(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen, float screenDepth, float screenNear)
@@ -35,6 +38,7 @@ bool Dx11::Init(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool f
 		MessageBox(0, _T("Direct3D Feature Level 11 unsupported."), 0, 0);
 		return false;
 	}
+	
 
 	//*2. 4X MSAA 품질 수준 지원 점검(안티엘리어싱)*//
 	m_Device->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &this->m_4xMsaaQuality);
@@ -182,4 +186,20 @@ void Dx11::BeginScene(float red, float green, float blue, float alpha)
 void Dx11::EndScene()
 {
 	m_SwapChain->Present(1, 0);
+}
+
+void Dx11::Release()
+{
+	//해제
+	SAFE_RELEASE(m_RenderTargetView);
+	SAFE_RELEASE(m_DepthStencilBuffer);
+	SAFE_RELEASE(m_SwapChain);
+	SAFE_RELEASE(m_DepthStencilView);
+
+	if(m_ImmediateContext)
+		m_ImmediateContext->ClearState();
+	SAFE_RELEASE(m_ImmediateContext);
+
+	SAFE_RELEASE(m_Device);
+
 }

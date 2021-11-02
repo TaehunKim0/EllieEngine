@@ -4,6 +4,7 @@ class Dx11
 {
 public:
 	Dx11();
+	~Dx11();
 
 	bool Init(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen,
 		float screenDepth, float screenNear);
@@ -12,6 +13,8 @@ public:
 	int Rendering();
 	void BeginScene(float red, float green, float blue, float alpha);
 	void EndScene();
+
+	void Release();
 
 private:
 	bool m_Vsync_Enabled;
