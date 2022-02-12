@@ -6,14 +6,16 @@ public:
 	Dx11();
 	~Dx11();
 
+	//Init
 	bool Init(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen,
 		float screenDepth, float screenNear);
 	bool Resize();
 
-	int Rendering();
+	//Render
 	void BeginScene(float red, float green, float blue, float alpha);
 	void EndScene();
 
+	//Release
 	void Release();
 
 private:
@@ -25,6 +27,7 @@ private:
 	int m_ScreenWidth;
 	int m_ScreenHeight;
 
+private:
 	IDXGISwapChain* m_SwapChain;
 	ID3D11Device* m_Device;
 	ID3D11DeviceContext* m_ImmediateContext;

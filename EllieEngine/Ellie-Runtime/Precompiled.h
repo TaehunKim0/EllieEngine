@@ -11,6 +11,8 @@
 #include <d3D11.h>
 #include <DirectXMath.h>
 
+#include <string>
+
 //*using*//
 using namespace DirectX;
 

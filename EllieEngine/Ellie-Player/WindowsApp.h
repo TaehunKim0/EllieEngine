@@ -25,6 +25,7 @@ namespace WindowsApp
 		case WM_DISPLAYCHANGE:
 		case WM_SIZE:
 		{
+			m_Dx11->Resize();
 			break;
 		}
 		case WM_CLOSE:
@@ -131,10 +132,11 @@ namespace WindowsApp
 			}
 			else
 			{
-				//m_Dx11->BeginScene(0.f,0.f,1.f,1.f);
+				m_Dx11->BeginScene(0.f,0.f,1.f,1.f);
+
 				//Game Update , Render
-				m_Dx11->Rendering();
-				//m_Dx11->EndScene();
+
+				m_Dx11->EndScene();
 			}
 		}
 	}

@@ -103,7 +103,7 @@ bool Dx11::Resize()
     assert(m_Device);
     assert(m_SwapChain);
 
-	//*5. ·»´õ ´ë»ó ºä ¼³Á¤*//
+	//*5. ·»´õ Å¸°Ù ºä ¼³Á¤*//
     m_SwapChain->ResizeBuffers(1, m_ScreenWidth, m_ScreenHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0);
     ID3D11Texture2D* backBuffer;
 
@@ -141,7 +141,6 @@ bool Dx11::Resize()
     depthStencilDesc.MiscFlags = 0;
 
     m_Device->CreateTexture2D(&depthStencilDesc, 0, &m_DepthStencilBuffer);       
-
     m_Device->CreateDepthStencilView(m_DepthStencilBuffer, 0, &m_DepthStencilView);
 
 	//*7. ºäµéÀ» Ãâ·Â º´ÇÕ±â ´Ü°è¿¡ ¹­±â*//
@@ -158,16 +157,6 @@ bool Dx11::Resize()
     m_ImmediateContext->RSSetViewports(1, &m_Viewport);
 
 	return true;
-}
-
-int Dx11::Rendering()
-{
-	BeginScene(0.f,0.f,1.f,1.f);
-
-	//Render
-
-	EndScene();
-	return 0;
 }
 
 void Dx11::BeginScene(float red, float green, float blue, float alpha)

@@ -1,11 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Dx11.h" />
     <ClInclude Include="Precompiled.h" />
+    <ClInclude Include="Dx11.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="EObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EGameObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Dx11.cpp" />
     <ClCompile Include="Precompiled.cpp" />
+    <ClCompile Include="Dx11.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="EObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EGameObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Object">
+      <UniqueIdentifier>{1c690acc-2b66-465e-8dd8-e906302fcfb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{d1861ed5-d3e1-4c34-8e54-ce49ef1ca3f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Component">
+      <UniqueIdentifier>{ce64c1aa-a764-4c78-8d27-24f9c8271d6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

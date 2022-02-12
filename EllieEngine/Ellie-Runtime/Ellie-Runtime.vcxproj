@@ -145,13 +145,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Dx11.h" />
+    <ClInclude Include="EComponent.h" />
+    <ClInclude Include="EGameObject.h" />
+    <ClInclude Include="EObject.h" />
     <ClInclude Include="Precompiled.h" />
+    <ClInclude Include="TransformComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Dx11.cpp" />
+    <ClCompile Include="EComponent.cpp" />
+    <ClCompile Include="EGameObject.cpp" />
+    <ClCompile Include="EObject.cpp" />
     <ClCompile Include="Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TransformComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
