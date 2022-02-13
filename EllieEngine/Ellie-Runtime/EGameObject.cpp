@@ -13,7 +13,7 @@ void EGameObject::Begin()
 {
 }
 
-void EGameObject::Update()
+void EGameObject::Tick()
 {
     if (false == m_IsEnable)
         return;

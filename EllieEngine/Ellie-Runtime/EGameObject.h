@@ -21,7 +21,7 @@ public:
 	~EGameObject();
 
 	virtual void Begin();
-	virtual void Update();
+	virtual void Tick();
 
 public:
 	void AddChild(EGameObject* child);

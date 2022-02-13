@@ -144,17 +144,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CoreBase.h" />
     <ClInclude Include="Dx11.h" />
     <ClInclude Include="EComponent.h" />
     <ClInclude Include="EGameObject.h" />
+    <ClInclude Include="EllieCore.h" />
     <ClInclude Include="EObject.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="Precompiled.h" />
     <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CoreBase.cpp" />
     <ClCompile Include="Dx11.cpp" />
     <ClCompile Include="EComponent.cpp" />
     <ClCompile Include="EGameObject.cpp" />
+    <ClCompile Include="EllieCore.cpp" />
     <ClCompile Include="EObject.cpp" />
     <ClCompile Include="Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

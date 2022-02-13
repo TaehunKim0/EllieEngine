@@ -17,6 +17,18 @@
     <ClInclude Include="TransformComponent.h">
       <Filter>Component</Filter>
     </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="EllieCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreBase.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Precompiled.cpp" />
@@ -35,6 +47,12 @@
     <ClCompile Include="TransformComponent.cpp">
       <Filter>Component</Filter>
     </ClCompile>
+    <ClCompile Include="EllieCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreBase.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -45,6 +63,12 @@
     </Filter>
     <Filter Include="Component">
       <UniqueIdentifier>{ce64c1aa-a764-4c78-8d27-24f9c8271d6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{4232a053-545e-4db3-8707-6a6ebff6de76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Math">
+      <UniqueIdentifier>{962a4a5b-70b1-43a1-b9f3-ef56b5f6868f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
