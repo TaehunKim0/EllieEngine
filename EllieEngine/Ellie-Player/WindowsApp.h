@@ -1,4 +1,7 @@
 #pragma once
+#include <Precompiled.h>
+#include <EllieProc.h>
+
 struct ScreenPoint {
 	ScreenPoint(const int& InX, const int& InY)
 	{
@@ -16,6 +19,7 @@ namespace WindowsApp
 	static ScreenPoint g_ScreenSize(0,0);
 	static TCHAR g_Title[64] = _T("Ellie Engine");
 	Dx11* m_Dx11;
+	EllieProc* mainProc;
 
 #pragma region WndProc
 	LRESULT CALLBACK WndProc(HWND hwnd, UINT32 msg, WPARAM wParam, LPARAM lParam)
@@ -104,6 +108,10 @@ namespace WindowsApp
 			return false;
 		}
 
+		//*MainProc*//
+		mainProc = new EllieProc();
+		mainProc->Init();
+
 		return true;
 	}
 
@@ -115,6 +123,9 @@ namespace WindowsApp
 		MSG msg;
 		bool done = false;
 		::ZeroMemory(&msg, sizeof(msg));
+
+		EllieProc* proc = new EllieProc();
+		proc->Init();
 
 		while (!done)
 		{
@@ -134,7 +145,7 @@ namespace WindowsApp
 			{
 				m_Dx11->BeginScene(0.f,0.f,1.f,1.f);
 
-				//Game Update , Render
+				proc->Tick();
 
 				m_Dx11->EndScene();
 			}
@@ -146,6 +157,8 @@ namespace WindowsApp
 	void Destroy()
 	{
 		SAFE_DELETE(m_Dx11);
+		mainProc->Excute();
+		SAFE_DELETE(mainProc);
 	}
 	
 	void Show(HWND handle)

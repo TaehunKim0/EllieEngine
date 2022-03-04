@@ -2,9 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Precompiled.h" />
-    <ClInclude Include="Dx11.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="EObject.h">
       <Filter>Object</Filter>
     </ClInclude>
@@ -26,15 +23,42 @@
     <ClInclude Include="EllieCore.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="CoreBase.h">
+    <ClInclude Include="IManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Dx11.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRendererComponent.h">
+      <Filter>Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ESprite.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EResource.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ETexture.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectMgr.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Container.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroDef.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="EllieProc.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
       <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Precompiled.cpp" />
-    <ClCompile Include="Dx11.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="EObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
@@ -50,7 +74,25 @@
     <ClCompile Include="EllieCore.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="CoreBase.cpp">
+    <ClCompile Include="Dx11.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRendererComponent.cpp">
+      <Filter>Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ESprite.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EResource.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ETexture.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectMgr.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="EllieProc.cpp">
       <Filter>Core</Filter>
     </ClCompile>
   </ItemGroup>

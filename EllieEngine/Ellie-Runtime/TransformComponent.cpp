@@ -16,7 +16,6 @@ bool ETransformComponent::Init()
 
 void ETransformComponent::Tick()
 {
-	
 }
 
 void ETransformComponent::Excute()

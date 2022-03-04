@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Singleton.h"
 /*
 Manager 들을 가지고 있는 Core 클래스
 Manager들을 List에 추가하고,
@@ -9,23 +9,29 @@ WindowsApp의 Tick 안에서 Core Tick 수행
 */
 
 #include <vector>
-#include "IManager.h"
 
-class EllieCore
+#define GetCore(CORENAME) Get##CORENAME##Core()
+
+#define CREATE_GETCORE_FUNCTION(CORENAME, core_instance)  \
+CORENAME* Get##CORENAME##Core() const {               \
+    return static_cast<CORENAME*>(core_instance);   \
+}
+
+#define CORE EllieCore::GetInstance()
+
+class IManager;
+class GameObjectMgr;
+class EllieCore : public Singleton<EllieCore>
 {
 public:
-    EllieCore();
-    ~EllieCore();
+    CREATE_GETCORE_FUNCTION(GameObjectMgr, m_GameObjectMgr);
 
-public:
+    void CreateCores();
     void Init();
     void Tick();
     void Excute();
 
 private:
-    //Managers
-    
-public:
     std::vector<IManager*> m_Managers;
-
+    GameObjectMgr* m_GameObjectMgr = nullptr;
 };

@@ -92,6 +92,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Precompiled.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -144,27 +145,43 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CoreBase.h" />
+    <ClInclude Include="Container.h" />
     <ClInclude Include="Dx11.h" />
     <ClInclude Include="EComponent.h" />
     <ClInclude Include="EGameObject.h" />
     <ClInclude Include="EllieCore.h" />
+    <ClInclude Include="EllieProc.h" />
     <ClInclude Include="EObject.h" />
+    <ClInclude Include="EResource.h" />
+    <ClInclude Include="ESprite.h" />
+    <ClInclude Include="ETexture.h" />
+    <ClInclude Include="GameObjectMgr.h" />
+    <ClInclude Include="IManager.h" />
+    <ClInclude Include="MacroDef.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Precompiled.h" />
+    <ClInclude Include="Singleton.h" />
+    <ClInclude Include="SpriteRendererComponent.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CoreBase.cpp" />
     <ClCompile Include="Dx11.cpp" />
     <ClCompile Include="EComponent.cpp" />
     <ClCompile Include="EGameObject.cpp" />
-    <ClCompile Include="EllieCore.cpp" />
+    <ClCompile Include="EllieCore.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Use</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="EllieProc.cpp" />
     <ClCompile Include="EObject.cpp" />
+    <ClCompile Include="EResource.cpp" />
+    <ClCompile Include="ESprite.cpp" />
+    <ClCompile Include="ETexture.cpp" />
+    <ClCompile Include="GameObjectMgr.cpp" />
     <ClCompile Include="Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SpriteRendererComponent.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

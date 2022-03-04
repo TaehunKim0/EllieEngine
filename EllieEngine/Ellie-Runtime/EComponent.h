@@ -3,6 +3,8 @@
 #include "EObject.h"
 #include "EGameObject.h"`
 
+#include <typeinfo>
+
 class EGameObject;
 class EComponent: public EObject
 {
@@ -16,7 +18,7 @@ public:
 	virtual ~EComponent();
 
 public:
-	virtual bool Init();		
+	virtual bool Init();
 	virtual void Tick();
 
 public:
@@ -28,3 +30,4 @@ public:
 	virtual bool GetIsEnable() const { return m_IsEnable;  }
 	std::string GetComponentType() const { return m_ComponentType; }
 };
+

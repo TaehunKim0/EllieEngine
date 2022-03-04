@@ -23,6 +23,9 @@ public:
 	virtual void Begin();
 	virtual void Tick();
 
+	virtual void Excute() override;
+	virtual void Destroy();
+
 public:
 	void AddChild(EGameObject* child);
 	void RemoveChild(EGameObject* child);
@@ -42,10 +45,6 @@ public:
 	T* CreateComponent();
 
 	bool InitializeComponent();
-
-public:
-	virtual void Excute() override;
-	virtual void Destroy();
 
 public:
 	virtual void SetIsEnable(bool enable);

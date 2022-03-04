@@ -1,12 +1,13 @@
 #include "Precompiled.h"
 #include "EllieCore.h"
+#include "IManager.h"
+#include "GameObjectMgr.h"
 
-EllieCore::EllieCore()
-{
-}
 
-EllieCore::~EllieCore()
+void EllieCore::CreateCores()
 {
+	m_GameObjectMgr = new GameObjectMgr();
+	m_Managers.push_back(m_GameObjectMgr);
 }
 
 void EllieCore::Init()
