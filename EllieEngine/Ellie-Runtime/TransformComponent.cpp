@@ -11,7 +11,9 @@ ETransformComponent::~ETransformComponent()
 
 bool ETransformComponent::Init()
 {
-	return false;
+
+
+	return true;
 }
 
 void ETransformComponent::Tick()

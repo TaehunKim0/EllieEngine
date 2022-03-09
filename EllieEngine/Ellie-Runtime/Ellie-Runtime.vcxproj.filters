@@ -35,9 +35,6 @@
     <ClInclude Include="ESprite.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="EResource.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="ETexture.h">
       <Filter>Object</Filter>
     </ClInclude>
@@ -55,6 +52,18 @@
     </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="EResource.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EScene.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMgr.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraMgr.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,9 +92,6 @@
     <ClCompile Include="ESprite.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="EResource.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="ETexture.cpp">
       <Filter>Object</Filter>
     </ClCompile>
@@ -94,6 +100,18 @@
     </ClCompile>
     <ClCompile Include="EllieProc.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="EResource.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EScene.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMgr.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraMgr.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

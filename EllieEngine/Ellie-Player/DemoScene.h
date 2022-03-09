@@ -1,15 +1,17 @@
 #pragma once
-#include "SpriteRendererComponent.h"
-#include "TransformComponent.h"
+#include "EScene.h"
 
-class DemoScene
+class ESprite;
+class ESpriteRendererComponent;
+class DemoScene : public EScene
 {
 private:
-	ESpriteRendererComponent* m_EllieSprite;
-	ETransformComponent* m_SceneTransform;
-
+	ESprite* m_BackgroundSprite;
+	ESpriteRendererComponent* m_SpriteRenderer;
 
 public:
-
-
+	void Init();
+	void Tick();
+	void Excute();
+	void Destroy();
 };

@@ -20,7 +20,9 @@ public:
 	~ETexture();
 
 	bool LoadTexture(ID3D11Device* g_pDevice, const WCHAR* path);
-	
+	ID3D11ShaderResourceView* GetTexture() {
+		return m_TextureResourceView;
+	}
 public:
 	//자신을 해제할 때 호출.
 	void Excute() override;

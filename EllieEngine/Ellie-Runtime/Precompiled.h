@@ -5,20 +5,21 @@
 //*Header*//
 #include <Windows.h>
 #include <tchar.h>
-#include <crtdbg.h>
 #include <stdlib.h>
 
-#include <d3D11.h>
+#include <d3d11.h>
 #include <D3DX11.h>
 #include <D3DX10math.h>
 #include <DirectXMath.h>
 #include <string>
+#include <D3DX11tex.h>
 
 //*using*//
 using namespace DirectX;
 
 //*Custom Class*//
 #include "Dx11.h"
+#include "EllieCore.h"
 #include "Matrix.h"
 #include "Vector.h"
 #include "MacroDef.h"

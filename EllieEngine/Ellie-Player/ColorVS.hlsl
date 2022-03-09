@@ -1,12 +1,14 @@
 
 struct VS_INPUT
 {
-	float mPosition : POSITION;
+	float4 mPosition : POSITION;
+    float2 mtex : TEXCOORD0;
 };
 
 struct VS_OUTPUT
 {
-	float mPosition : POSITION;
+	float4 mPosition : SV_POSITION;
+	float2 mtex : TEXCOORD0;
 };
 
 cbuffer MatrixBuffer
@@ -22,6 +24,7 @@ VS_OUTPUT main(VS_INPUT Input)
 	Output.mPosition = mul(Input.mPosition, gWorldMatrix);
 	Output.mPosition = mul(Input.mPosition, gViewMatrix);
 	Output.mPosition = mul(Input.mPosition, gProjectionMatrix);
+    Output.mtex = Input.mtex;
 	
 	return Output;
 }

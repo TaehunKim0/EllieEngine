@@ -11,12 +11,20 @@ ETexture::~ETexture()
 
 bool ETexture::LoadTexture(ID3D11Device* g_pDevice, const WCHAR* path)
 {
-    //*렌더타겟용 텍스처 만드는 방법은 따로
+    /*밑의 모든 과정을 간소화 한 함수*/
+    /*HRESULT result;
+    result = D3DX11CreateShaderResourceViewFromFileW(g_pDevice, path, NULL, NULL, &m_TextureResourceView, NULL);
+    if (FAILED(result))
+        return false;*/
+
+
 
     //1. 이미지 파일 조사
     //해당 파일의 사이즈나 포맷에 맞춘 텍스처를 만들고 싶은 경우에 사용한다.
     D3DX11_IMAGE_INFO imageinfo;
-    HRESULT hr; D3DX11GetImageInfoFromFile(path, NULL, &imageinfo, &hr);
+    HRESULT hr; 
+    
+    D3DX11GetImageInfoFromFile(path, NULL, &imageinfo, &hr);
     if (FAILED(hr)) return false;
     m_ImageInfo = imageinfo;
 
@@ -57,6 +65,8 @@ bool ETexture::LoadTexture(ID3D11Device* g_pDevice, const WCHAR* path)
 
 void ETexture::Excute()
 {
+    m_TextureResource->Release();
+    m_TextureResourceView->Release();
 }
 
 void ETexture::Destroy()

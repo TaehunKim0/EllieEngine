@@ -1,6 +1,9 @@
 #pragma once
-#include <Precompiled.h>
-#include <EllieProc.h>
+#include "Precompiled.h"
+#include "EllieProc.h"
+#include "Dx11.h"
+#include "DemoScene.h"
+#include "SceneMgr.h"
 
 struct ScreenPoint {
 	ScreenPoint(const int& InX, const int& InY)
@@ -18,7 +21,6 @@ namespace WindowsApp
 	static const TCHAR* g_ClassName = _T("Ellie Engine");
 	static ScreenPoint g_ScreenSize(0,0);
 	static TCHAR g_Title[64] = _T("Ellie Engine");
-	Dx11* m_Dx11;
 	EllieProc* mainProc;
 
 #pragma region WndProc
@@ -29,7 +31,7 @@ namespace WindowsApp
 		case WM_DISPLAYCHANGE:
 		case WM_SIZE:
 		{
-			m_Dx11->Resize();
+			DX11.Resize();
 			break;
 		}
 		case WM_CLOSE:
@@ -100,8 +102,7 @@ namespace WindowsApp
 		}
 
 		//*DirectX11*//
-		m_Dx11 = new Dx11();
-		bool result = m_Dx11->Init(InScreenSize.X, InScreenSize.Y, false, g_Handle, false, 1000.f, 1.0f);
+		bool result = DX11.Init(InScreenSize.X, InScreenSize.Y, false, g_Handle, false, 1000.f, 1.0f);
 		if (result == false)
 		{
 			::MessageBox(nullptr, _T("DirectX11 Init failed!"), _T("Error!"), MB_ICONEXCLAMATION | MB_OK);
@@ -111,6 +112,10 @@ namespace WindowsApp
 		//*MainProc*//
 		mainProc = new EllieProc();
 		mainProc->Init();
+
+		//Scene Initialize
+		//CORE.GetSceneMgrCore()->SetScene(new DemoScene());
+		//CORE.GetSceneMgrCore()->GetCurrentScene()->Init();
 
 		return true;
 	}
@@ -143,11 +148,11 @@ namespace WindowsApp
 			}
 			else
 			{
-				m_Dx11->BeginScene(0.f,0.f,1.f,1.f);
+				DX11.BeginScene(0.f,0.f,1.f,1.f);
 
 				proc->Tick();
 
-				m_Dx11->EndScene();
+				DX11.EndScene();
 			}
 		}
 	}
@@ -156,7 +161,7 @@ namespace WindowsApp
 
 	void Destroy()
 	{
-		SAFE_DELETE(m_Dx11);
+		DX11.Release();
 		mainProc->Excute();
 		SAFE_DELETE(mainProc);
 	}

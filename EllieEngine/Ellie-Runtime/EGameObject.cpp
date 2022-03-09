@@ -17,6 +17,13 @@ void EGameObject::Tick()
 {
     if (false == m_IsEnable)
         return;
+
+    for (const auto& component : m_Components) {
+        if (component == nullptr) continue;
+
+        if (component->GetIsEnable())
+            component->Tick();
+    }
 }
 
 void EGameObject::AddChild(EGameObject* child)

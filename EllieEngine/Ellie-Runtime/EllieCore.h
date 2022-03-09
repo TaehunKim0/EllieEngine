@@ -21,10 +21,14 @@ CORENAME* Get##CORENAME##Core() const {               \
 
 class IManager;
 class GameObjectMgr;
+class CameraMgr;
+class SceneMgr;
 class EllieCore : public Singleton<EllieCore>
 {
 public:
     CREATE_GETCORE_FUNCTION(GameObjectMgr, m_GameObjectMgr);
+    CREATE_GETCORE_FUNCTION(CameraMgr, m_CameraMgr);
+    CREATE_GETCORE_FUNCTION(SceneMgr, m_SceneMgr);
 
     void CreateCores();
     void Init();
@@ -34,4 +38,6 @@ public:
 private:
     std::vector<IManager*> m_Managers;
     GameObjectMgr* m_GameObjectMgr = nullptr;
+    CameraMgr* m_CameraMgr = nullptr;
+    SceneMgr* m_SceneMgr = nullptr;
 };

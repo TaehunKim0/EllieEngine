@@ -1,6 +1,10 @@
 #pragma once
 
-class Dx11
+#include "Singleton.h"
+
+#define DX11 Dx11::GetInstance()
+
+class Dx11 : public Singleton<Dx11>
 {
 public:
 	Dx11();
@@ -18,6 +22,16 @@ public:
 	//Release
 	void Release();
 
+	ID3D11Device* GetDevice() {
+		return m_Device;
+	}
+	ID3D11DeviceContext* GetDeviceContext() {
+		return m_ImmediateContext;
+	}
+	const HWND GetHWND() {
+		return m_Hwnd;
+	}
+
 private:
 	bool m_Vsync_Enabled;
 	int m_VideoCardMemory;
@@ -28,6 +42,8 @@ private:
 	int m_ScreenHeight;
 
 private:
+	HWND m_Hwnd;
+
 	IDXGISwapChain* m_SwapChain;
 	ID3D11Device* m_Device;
 	ID3D11DeviceContext* m_ImmediateContext;
