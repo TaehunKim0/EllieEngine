@@ -2,6 +2,9 @@
 #include "ESprite.h"
 
 ESprite::ESprite()
+	: m_Texture(0),
+	m_SampleState(0),
+	m_TransformComponent(nullptr)
 {
 }
 
@@ -11,14 +14,10 @@ ESprite::~ESprite()
 
 void ESprite::Begin()
 {
-
 }
 
 void ESprite::Tick()
 {
-	EGameObject::Tick();
-
-
 }
 
 bool ESprite::CreateTexture(ID3D11Device* g_pDevice, const WCHAR* path)

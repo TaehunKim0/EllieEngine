@@ -3,7 +3,7 @@
 class CameraMgr : public IManager
 {
 public:
-	void Init();
-	void Tick();
-	void Excute();
+	void Init() final;
+	void Tick() final;
+	void Excute() final;
 };

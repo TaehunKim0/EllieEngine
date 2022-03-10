@@ -2,6 +2,7 @@
 #include "ETexture.h"
 
 ETexture::ETexture()
+    : m_ImageInfo({0,})
 {
 }
 

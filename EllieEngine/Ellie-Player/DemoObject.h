@@ -1,13 +1,15 @@
 #pragma once
-#include "EScene.h"
+
+#include "EGameObject.h"
 
 class ESprite;
 class ESpriteRendererComponent;
-class DemoScene : public EScene
+class DemoObject : public EGameObject
 {
 public:
-	void Init() final;
+	void Begin() final;
 	void Tick() final;
+
 	void Excute() final;
 	void Destroy() final;
 

@@ -3,7 +3,6 @@
 
 ESpriteRendererComponent::ESpriteRendererComponent()
 {
-
 }
 
 ESpriteRendererComponent::~ESpriteRendererComponent()
@@ -16,11 +15,11 @@ bool ESpriteRendererComponent::Init()
     bool result;
 
     //정점, 인덱스 버퍼 생성
-    result = InitializeBuffer(); 
+    result = initializeBuffer(); 
     if (false == result) return false;
 
     //셰이더 컴파일 후 셰이더 오브젝트 생성, 인풋 레이아웃 설정
-    result = InitializeShader(TEXT("ColorVS.hlsl"), TEXT("ColorPS.hlsl")); 
+    result = initializeShader(TEXT("ColorVS.hlsl"), TEXT("ColorPS.hlsl")); 
     if (false == result) return false;
 
     return true;
@@ -56,12 +55,12 @@ void ESpriteRendererComponent::Render()
     Mat4x4 world, view, projection;
     m_Sprite->GetMatrix(world, view, projection);
 
-    RenderBuffer();
-    SetShaderParameters(world, view, projection, m_Sprite->GetTexture());
-    RenderShader();
+    renderBuffer();
+    setShaderParameters(world, view, projection, m_Sprite->GetTexture());
+    renderShader();
 }
 
-void ESpriteRendererComponent::RenderShader()
+void ESpriteRendererComponent::renderShader()
 {
     //정점, 픽셀 셰이더를 설정하고 삼각형을 그립니다.
     DX11.GetDeviceContext()->IASetInputLayout(m_InputLayout);
@@ -70,7 +69,7 @@ void ESpriteRendererComponent::RenderShader()
     DX11.GetDeviceContext()->DrawIndexed(m_IndexCount, 0, 0);
 }
 
-void ESpriteRendererComponent::RenderBuffer()
+void ESpriteRendererComponent::renderBuffer()
 {
     //정점 버퍼와 인덱스 버퍼를 파이프라인에 넣어 그릴 준비를 합니다.
     unsigned int stride;
@@ -87,20 +86,20 @@ void ESpriteRendererComponent::RenderBuffer()
     DX11.GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
 
-bool ESpriteRendererComponent::InitializeBuffer()
+bool ESpriteRendererComponent::initializeBuffer()
 {
     //버텍스 버퍼 생성
-    bool result = InitializeVertexBuffer();
+    bool result = initializeVertexBuffer();
     if (false == result) return false;
     
     //인덱스 버퍼 생성
-    result = InitializeIndexBuffer();
+    result = initializeIndexBuffer();
     if (false == result) return false;
 
     return true;
 }
 
-bool ESpriteRendererComponent::InitializeVertexBuffer()
+bool ESpriteRendererComponent::initializeVertexBuffer()
 {
     //1.생성할 버텍스 버퍼의 데이터 형식을 정의하는 D3D11_BUFFER_DESC 구조체 선언
     D3D11_BUFFER_DESC xyzBufferDesc;
@@ -140,7 +139,7 @@ bool ESpriteRendererComponent::InitializeVertexBuffer()
     return true;
 }
 
-bool ESpriteRendererComponent::InitializeIndexBuffer()
+bool ESpriteRendererComponent::initializeIndexBuffer()
 {
     //인덱스 버퍼도 버퍼리소스의 한 종류이므로 버텍스 버퍼와 생성방식이 비슷하다.
 
@@ -177,7 +176,7 @@ bool ESpriteRendererComponent::InitializeIndexBuffer()
     return true;
 }
 
-bool ESpriteRendererComponent::InitializeInputLayout(ID3D10Blob* pBlobVS)
+bool ESpriteRendererComponent::initializeInputLayout(ID3D10Blob* pBlobVS)
 {
     D3D11_INPUT_ELEMENT_DESC polygonLayout[2] =
     {
@@ -199,7 +198,7 @@ bool ESpriteRendererComponent::InitializeInputLayout(ID3D10Blob* pBlobVS)
     return false;
 }
 
-bool ESpriteRendererComponent::InitializeShader(const TCHAR* vsFilename, const TCHAR* psFilename)
+bool ESpriteRendererComponent::initializeShader(const TCHAR* vsFilename, const TCHAR* psFilename)
 {
     ID3D10Blob* errorMessage = 0;
 
@@ -249,7 +248,7 @@ bool ESpriteRendererComponent::InitializeShader(const TCHAR* vsFilename, const T
     if (FAILED(hr)) return false;
 
     //3.입력 레이아웃
-    bool result = InitializeInputLayout(pBlobVs);
+    bool result = initializeInputLayout(pBlobVs);
     if (false == result) return false;
 
     SAFE_RELEASE(pBlobVs);
@@ -258,7 +257,7 @@ bool ESpriteRendererComponent::InitializeShader(const TCHAR* vsFilename, const T
     return true;
 }
 
-bool ESpriteRendererComponent::SetShaderParameters(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix ,ID3D11ShaderResourceView* texture)
+bool ESpriteRendererComponent::setShaderParameters(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix ,ID3D11ShaderResourceView* texture)
 {
     D3D11_BUFFER_DESC matrixBufferDesc;
     MatrixBufferType* dataPtr;

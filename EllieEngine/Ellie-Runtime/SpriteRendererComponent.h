@@ -12,30 +12,30 @@ public:
 	~ESpriteRendererComponent();
 
 public:
-	bool Init();
-	void Tick();
+	bool Init() final;
+	void Tick() final;
 	void Render();
 
-	void Excute() override;
-	void Destroy();
+	void Excute() final;
+	void Destroy() final;
 
 public:
 	void SetSprite(ESprite* sprite);
 
 private:
-	bool InitializeBuffer();
-	bool InitializeVertexBuffer();
-	bool InitializeIndexBuffer();
+	bool initializeBuffer();
+	bool initializeVertexBuffer();
+	bool initializeIndexBuffer();
 
-	bool InitializeShader(const TCHAR* vsFilename, const TCHAR* psFilename);
-	bool SetShaderParameters(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix, ID3D11ShaderResourceView* texture);
-	bool InitializeInputLayout(ID3D10Blob* pBlobVS);
+	bool initializeShader(const TCHAR* vsFilename, const TCHAR* psFilename);
+	bool setShaderParameters(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix, ID3D11ShaderResourceView* texture);
+	bool initializeInputLayout(ID3D10Blob* pBlobVS);
 
-	void RenderShader();
-	void RenderBuffer();
+	void renderShader();
+	void renderBuffer();
 
 private:
-	ETransformComponent* m_TransformComponent = nullptr;
+	ETransformComponent* m_TransformComponent;
 	ESprite* m_Sprite;
 
 	struct VertexType

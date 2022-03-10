@@ -5,29 +5,19 @@
 
 class ETransformComponent : public EComponent
 {
-private:
-	Mat4x4 m_WorldMatrix;
-	Mat4x4 m_ViewMatrix;
-	Mat4x4 m_ProjectionMatrix;
-
-	Vec3 m_Scale;
-	Vec3 m_Rotation;
-	Vec3 m_Position;
-	
 public:
 	ETransformComponent();
 	virtual ~ETransformComponent();
 
 public:
-	bool Init() override;
-	void Tick() override;
-	void Excute() override;
+	bool Init() final;
+	void Tick() final;
+	void Excute() final;
 
 public:
 	void SetPosition(float x, float y, float z) {
 		m_Position.x = x; m_Position.y = y; m_Position.z = z;
 	}
-
 
 	Vec3 GetPosition() {
 		return m_Position;
@@ -39,10 +29,18 @@ public:
 		return m_Scale;
 	}
 
-	void GetMatrix(Mat4x4 world, Mat4x4 view, Mat4x4 projection) {
-		world = m_WorldMatrix;
-		view = m_ViewMatrix;
-		projection = m_ProjectionMatrix;
+	void GetMatrix(Mat4x4 outWorld, Mat4x4 outView, Mat4x4 outProjection) {
+		outWorld = m_WorldMatrix;
+		outView = m_ViewMatrix;
+		outProjection = m_ProjectionMatrix;
 	}
 
+private:
+	Mat4x4 m_WorldMatrix;
+	Mat4x4 m_ViewMatrix;
+	Mat4x4 m_ProjectionMatrix;
+
+	Vec3 m_Scale;
+	Vec3 m_Rotation;
+	Vec3 m_Position;
 };

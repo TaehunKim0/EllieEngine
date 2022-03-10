@@ -5,10 +5,8 @@
 
 class GameObjectMgr : public IManager , public Container<EGameObject>
 {
-private:
-
 public:
-	void Init();
-	void Tick();
-	void Excute();
+	void Init() final;
+	void Tick() final;
+	void Excute() final;
 };

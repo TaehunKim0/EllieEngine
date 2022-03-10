@@ -1,21 +1,10 @@
 #pragma once
 #include<list>
 #include "EObject.h"
-#include "EComponent.h"
 
 class EComponent;
 class EGameObject : public EObject
 {
-private:
-	std::list<EGameObject*> m_Children;
-	EGameObject* m_Parent = nullptr;
-
-	std::list<EComponent*> m_Components;
-
-private:
-	bool m_IsPendingKill = false;
-	bool m_IsEnable = true;
-
 public:
 	EGameObject();
 	~EGameObject();
@@ -23,7 +12,7 @@ public:
 	virtual void Begin();
 	virtual void Tick();
 
-	virtual void Excute() override;
+	virtual void Excute();
 	virtual void Destroy();
 
 public:
@@ -36,6 +25,9 @@ public:
 	void RemoveParent();
 
 public:
+	virtual void SetIsEnable(bool enable);
+
+public:
 	void AddComponent(EComponent* component);
 	void DeleteComponent(EComponent* component);
 
@@ -46,8 +38,15 @@ public:
 
 	bool InitializeComponent();
 
-public:
-	virtual void SetIsEnable(bool enable);
+private:
+	bool m_bIsPendingKill;
+	bool m_bIsEnable;
+
+private:
+	std::list<EGameObject*> m_Children;
+	EGameObject* m_Parent = nullptr;
+
+	std::list<EComponent*> m_Components;
 };
 
 template<class T>

@@ -1,7 +1,12 @@
 #include "Precompiled.h"
 #include "EGameObject.h"
+#include "EComponent.h"
+
 
 EGameObject::EGameObject()
+    : m_bIsEnable(true),
+    m_bIsPendingKill(false),
+    m_Parent(nullptr)
 {
 }
 
@@ -15,7 +20,7 @@ void EGameObject::Begin()
 
 void EGameObject::Tick()
 {
-    if (false == m_IsEnable)
+    if (false == m_bIsEnable)
         return;
 
     for (const auto& component : m_Components) {
@@ -95,11 +100,11 @@ void EGameObject::Destroy()
 
 void EGameObject::SetIsEnable(bool enable)
 {
-    m_IsEnable = enable;
+    m_bIsEnable = enable;
 
     for (const auto& child : m_Components)
     {
         if (nullptr == child) continue;
-        child->SetIsEnable(m_IsEnable);
+        child->SetIsEnable(m_bIsEnable);
     }
 }

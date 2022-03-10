@@ -151,12 +151,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DemoObject.cpp" />
     <ClCompile Include="DemoScene.cpp" />
     <ClCompile Include="WindowsApp.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DemoObject.h" />
     <ClInclude Include="DemoScene.h" />
     <ClInclude Include="WindowsApp.h" />
   </ItemGroup>

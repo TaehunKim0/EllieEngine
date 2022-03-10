@@ -26,12 +26,18 @@
     <ClCompile Include="DemoScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="DemoObject.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsApp.h">
       <Filter>WindowsApp</Filter>
     </ClInclude>
     <ClInclude Include="DemoScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="DemoObject.h">
       <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,9 +3,6 @@
 
 class EScene : public EGameObject
 {
-private:
-	std::string m_Name;
-
 public:
 	EScene() = default;
 	~EScene() = default;
@@ -25,5 +22,7 @@ public:
 		m_Name = name;
 	}
 
+private:
+	std::string m_Name;
 };
 
