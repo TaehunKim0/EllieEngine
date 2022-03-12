@@ -2,9 +2,9 @@
 #include "Precompiled.h"
 namespace Math
 {
-	typedef D3DXVECTOR2 Vector2;
-	typedef D3DXVECTOR3 Vector3;
-	typedef D3DXVECTOR4 Vector4;
+	typedef XMFLOAT2 Vector2;
+	typedef XMFLOAT3 Vector3;
+	typedef XMFLOAT4 Vector4;
 }
 
 #define Vec2 Math::Vector2

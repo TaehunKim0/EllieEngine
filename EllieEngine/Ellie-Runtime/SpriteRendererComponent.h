@@ -28,7 +28,7 @@ private:
 	bool initializeIndexBuffer();
 
 	bool initializeShader(const TCHAR* vsFilename, const TCHAR* psFilename);
-	bool setShaderParameters(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix, ID3D11ShaderResourceView* texture);
+	bool setShaderParameters(Mat4x4 worldMatrix, Mat4x4 viewMatrix, Mat4x4 projectionMatrix, ID3D11ShaderResourceView* texture);
 	bool initializeInputLayout(ID3D10Blob* pBlobVS);
 
 	void renderShader();
@@ -42,7 +42,7 @@ private:
 	{
 		XMFLOAT3 Position;
 	};
-	struct MatrixBufferType { D3DXMATRIX world; D3DXMATRIX view; D3DXMATRIX projection; };
+	struct MatrixBufferType { Mat4x4 world; Mat4x4 view; Mat4x4 projection; };
 
 	ID3D11Buffer* m_VertexBuffer;
 	ID3D11Buffer* m_IndexBuffer;

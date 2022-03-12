@@ -10,6 +10,7 @@ void DemoScene::Init()
 	
 	m_SpriteRenderer = CreateComponent<ESpriteRendererComponent>();
 	m_SpriteRenderer->SetSprite(m_BackgroundSprite);
+
 	//Render를 어떻게 할까
 }
 

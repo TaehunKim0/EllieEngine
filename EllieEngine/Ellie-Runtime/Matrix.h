@@ -4,7 +4,7 @@
 
 namespace Math
 {
-	typedef D3DXMATRIX Matrix4x4;
+	typedef XMMATRIX Matrix4x4;
 
 	enum MatrixType{World, View, Projection};
 }

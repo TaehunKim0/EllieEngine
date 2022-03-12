@@ -52,7 +52,7 @@ void ESpriteRendererComponent::SetSprite(ESprite* sprite)
 
 void ESpriteRendererComponent::Render()
 {
-    Mat4x4 world, view, projection;
+    Mat4x4 world(0), view(0), projection(0);
     m_Sprite->GetMatrix(world, view, projection);
 
     renderBuffer();
@@ -157,7 +157,7 @@ bool ESpriteRendererComponent::initializeIndexBuffer()
     //2.인덱스 버퍼 서브리소스 초기화
     UINT idxVertexID[] =
     {
-        0,1,2 ,2,1,3
+        0,1,2 ,0,2,3
     };
 
     //3.인덱스 버퍼 서브리소스 정의
@@ -257,7 +257,7 @@ bool ESpriteRendererComponent::initializeShader(const TCHAR* vsFilename, const T
     return true;
 }
 
-bool ESpriteRendererComponent::setShaderParameters(D3DXMATRIX worldMatrix, D3DXMATRIX viewMatrix, D3DXMATRIX projectionMatrix ,ID3D11ShaderResourceView* texture)
+bool ESpriteRendererComponent::setShaderParameters(Mat4x4 worldMatrix, Mat4x4 viewMatrix, Mat4x4 projectionMatrix ,ID3D11ShaderResourceView* texture)
 {
     D3D11_BUFFER_DESC matrixBufferDesc;
     MatrixBufferType* dataPtr;
@@ -274,9 +274,9 @@ bool ESpriteRendererComponent::setShaderParameters(D3DXMATRIX worldMatrix, D3DXM
     if(FAILED(hr)) { return false; }
 
     //행렬을 전치하여 셰이더용으로 준비합니다.
-    D3DXMatrixTranspose(&worldMatrix, &worldMatrix);
-    D3DXMatrixTranspose(&viewMatrix, &viewMatrix);
-    D3DXMatrixTranspose(&projectionMatrix, &projectionMatrix);
+    worldMatrix = XMMatrixTranspose(worldMatrix);
+    viewMatrix = XMMatrixTranspose(viewMatrix);
+    projectionMatrix = XMMatrixTranspose(projectionMatrix);
 
     D3D11_MAPPED_SUBRESOURCE mappedResource;
     //상수 버퍼를 쓰기 위해 잠급니다.

@@ -9,7 +9,6 @@
 
 #include <d3d11.h>
 #include <D3DX11.h>
-#include <D3DX10math.h>
 #include <DirectXMath.h>
 #include <string>
 #include <D3DX11tex.h>
