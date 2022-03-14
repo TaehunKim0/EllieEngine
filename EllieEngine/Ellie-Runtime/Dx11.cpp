@@ -87,6 +87,13 @@ bool Dx11::Init(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool f
 		return false;
 	}
 
+	float fieldOfView = (float)XM_PI / 4.0f;
+	float screenAspect = (float)screenWidth / (float)screenHeight;
+
+	m_ProjectionMatrix = XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth);
+
+	m_WorldMatrix = XMMatrixIdentity();
+
 	SAFE_RELEASE(dxgiDevice);
 	SAFE_RELEASE(dxgiAdapter);
 	SAFE_RELEASE(dxgiFactory);

@@ -9,14 +9,13 @@ void DemoScene::Init()
 	m_BackgroundSprite->CreateTexture(DX11.GetDevice() , TEXT("../Resource/BackGround.png"));
 	
 	m_SpriteRenderer = CreateComponent<ESpriteRendererComponent>();
+	m_SpriteRenderer->Init();
 	m_SpriteRenderer->SetSprite(m_BackgroundSprite);
-
-	//Render를 어떻게 할까
 }
 
 void DemoScene::Tick()
 {
-	EGameObject::Tick();
+	m_SpriteRenderer->Render();
 }
 
 void DemoScene::Excute()

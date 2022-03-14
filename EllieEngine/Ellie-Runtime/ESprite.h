@@ -27,6 +27,9 @@ public:
 	void GetMatrix(Mat4x4 outWorld, Mat4x4 outView, Mat4x4 outProjection) {
 		m_TransformComponent->GetMatrix(outWorld, outView, outProjection);
 	}
+	ID3D11SamplerState** GetSamplerState() {
+		return &m_SampleState;
+	}
 
 private:
 	ETransformComponent* m_TransformComponent;

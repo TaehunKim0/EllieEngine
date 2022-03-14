@@ -31,7 +31,7 @@ private:
 	bool setShaderParameters(Mat4x4 worldMatrix, Mat4x4 viewMatrix, Mat4x4 projectionMatrix, ID3D11ShaderResourceView* texture);
 	bool initializeInputLayout(ID3D10Blob* pBlobVS);
 
-	void renderShader();
+	void renderShader(Mat4x4 worldMatrix, Mat4x4 viewMatrix, Mat4x4 projectionMatrix, ID3D11ShaderResourceView* texture);
 	void renderBuffer();
 
 private:
@@ -40,8 +40,10 @@ private:
 
 	struct VertexType
 	{
-		XMFLOAT3 Position;
+		Vec3 Position;
+		Vec4 Color;
 	};
+
 	struct MatrixBufferType { Mat4x4 world; Mat4x4 view; Mat4x4 projection; };
 
 	ID3D11Buffer* m_VertexBuffer;
@@ -52,5 +54,6 @@ private:
 	ID3D11PixelShader* m_PixelShader;
 	ID3D11InputLayout* m_InputLayout;
 
+	int m_VertexCount;
 	int m_IndexCount;
 };

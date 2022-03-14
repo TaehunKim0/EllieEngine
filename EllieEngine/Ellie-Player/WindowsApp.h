@@ -4,6 +4,7 @@
 #include "Dx11.h"
 #include "DemoScene.h"
 #include "SceneMgr.h"
+#include "CameraMgr.h"
 
 struct ScreenPoint {
 	ScreenPoint(const int& InX, const int& InY)
@@ -17,6 +18,7 @@ namespace WindowsApp
 {
 	static HINSTANCE g_Instance;
 	static HWND g_Handle;
+	bool m_bWindowed;
 	
 	static const TCHAR* g_ClassName = _T("Ellie Engine");
 	static ScreenPoint g_ScreenSize(0,0);
@@ -60,7 +62,7 @@ namespace WindowsApp
 #pragma endregion
 
 #pragma region CreateWindow
-	bool Create(HINSTANCE InhInstance, const ScreenPoint& InScreenSize)
+	bool Create(HINSTANCE InhInstance, const ScreenPoint& InScreenSize , bool bWindowed)
 	{
 		g_Instance = InhInstance;
 
@@ -114,8 +116,7 @@ namespace WindowsApp
 		mainProc->Init();
 
 		//Scene Initialize
-		//CORE.GetSceneMgrCore()->SetScene(new DemoScene());
-		//CORE.GetSceneMgrCore()->GetCurrentScene()->Init();
+		CORE.GetCore(SceneMgr)->SetScene(new DemoScene());
 
 		return true;
 	}
@@ -128,9 +129,6 @@ namespace WindowsApp
 		MSG msg;
 		bool done = false;
 		::ZeroMemory(&msg, sizeof(msg));
-
-		EllieProc* proc = new EllieProc();
-		proc->Init();
 
 		while (!done)
 		{
@@ -148,9 +146,10 @@ namespace WindowsApp
 			}
 			else
 			{
-				DX11.BeginScene(0.f,0.f,1.f,1.f);
+				DX11.BeginScene(0.f,0.f,0.f,1.f);
 
-				proc->Tick();
+				CORE.GetCore(CameraMgr)->Tick();
+				CORE.GetCore(SceneMgr)->Tick();
 
 				DX11.EndScene();
 			}

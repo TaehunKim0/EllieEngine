@@ -6,7 +6,7 @@ int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	ScreenPoint ScreenSize(960, 600);
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	if (!WindowsApp::Create(hInstance, ScreenSize))
+	if (!WindowsApp::Create(hInstance, ScreenSize, 0))
 	{
 		return -1;
 	}

@@ -2,6 +2,8 @@
 #define WIN32_LEAN_AND_MEAN
 #define _CRTDBG_MAP_ALLOC
 
+#pragma comment(lib, "dxgi.lib")
+
 //*Header*//
 #include <Windows.h>
 #include <tchar.h>
@@ -12,6 +14,7 @@
 #include <DirectXMath.h>
 #include <string>
 #include <D3DX11tex.h>
+#include <d3dx9math.h>
 
 //*using*//
 using namespace DirectX;

@@ -1,5 +1,8 @@
 #pragma once
 #include "IManager.h"
+#include "Matrix.h"
+#include "Vector.h"
+
 class CameraMgr : public IManager
 {
 public:
@@ -15,10 +18,10 @@ public:
 	void GetRotation(Vec3& rot);
 
 	void Render();
-	void GetViewMatrix(Mat4x4& outViewMatrix);
+	void GetViewMatrix(Mat4x4& viewMatrix);
 
 	void GenerateBaseViewMatrix();
-	void GetBaseViewMatrix(Mat4x4& outViewMatrix);
+	void GetBaseViewMatrix(Mat4x4& viewMatrix);
 
 private:
 	Vec3 m_Position;

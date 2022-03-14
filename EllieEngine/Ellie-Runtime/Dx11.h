@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Singleton.h"
-
+#include "Matrix.h"
 #define DX11 Dx11::GetInstance()
 
 class Dx11 : public Singleton<Dx11>
@@ -32,6 +32,13 @@ public:
 		return m_Hwnd;
 	}
 
+	void GetWorldMatrix(Mat4x4 outWorldMatrix) {
+		outWorldMatrix = m_WorldMatrix;
+	}
+	void GetProjectionMatrix(Mat4x4 outProjectionMatrix) {
+		outProjectionMatrix = m_ProjectionMatrix;
+	}
+
 private:
 	bool m_Vsync_Enabled;
 	int m_VideoCardMemory;
@@ -58,9 +65,9 @@ private:
 	ID3D11RasterizerState* m_RasterState;
 	ID3D11RasterizerState* m_RasterStateNoCulling;
 
-	XMMATRIX m_ProjectionMatrix;
-	XMMATRIX m_WorldMatrix;
-	XMMATRIX m_OrthoMatrix;
+	Mat4x4 m_ProjectionMatrix;
+	Mat4x4 m_WorldMatrix;
+	Mat4x4 m_OrthoMatrix;
 
 	D3D11_VIEWPORT m_Viewport;
 };
