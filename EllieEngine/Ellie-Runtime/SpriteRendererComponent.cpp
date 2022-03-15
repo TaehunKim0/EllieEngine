@@ -130,14 +130,14 @@ bool ESpriteRendererComponent::initializeVertexBuffer()
     //2.서브 리소스(리소스의 실제 데이터)의 초기화 데이터로 D3D11_SUBRESOURCE_DATA 구조체를 정의
     //2-1.서브 리소스 초기화
     VertexType* vertices = new VertexType[m_VertexCount];
-    vertices[0].Position = Vec3(-1.0f, -1.0f, 0.0f);  // Bottom left.
-    vertices[0].Color = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
+    vertices[0].Position = Vec3(-0.5f, -0.50f, 0.0f);  // Bottom left.
+    vertices[0].Color = Vec4(1.0f, 0.0f, 0.0f, 1.0f);
 
-    vertices[1].Position = Vec3(0.0f, 1.0f, 0.0f);  // Top middle.
-    vertices[1].Color = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
+    vertices[1].Position = Vec3(0.0f, 0.50f, 0.0f);  // Top middle.
+    vertices[1].Color = Vec4(1.0f, 0.0f, 0.0f, 1.0f);
 
-    vertices[2].Position = Vec3(1.0f, -1.0f, 0.0f);  // Bottom right.
-    vertices[2].Color = Vec4(0.0f, 0.0f, 0.0f, 1.0f);
+    vertices[2].Position = Vec3(0.5f, -0.5f, 0.0f);  // Bottom right.
+    vertices[2].Color = Vec4(1.0f, 0.0f, 0.0f, 1.0f);
 
     //2-2.서브 리소스 정의
     D3D11_SUBRESOURCE_DATA xyzSubData;
@@ -216,7 +216,7 @@ bool ESpriteRendererComponent::initializeShader(const TCHAR* vsFilename, const T
     ID3DBlob* pBlobPs = nullptr; //컴파일된 HLSL 바이트 코드를 저장해두는 변수(PixelShader)
 
    // 버텍스 셰이더 컴파일
-    HRESULT hr1 = D3DX11CompileFromFile(
+    HRESULT hr1 = D3DX11CompileFromFileW(
         vsFilename,
         nullptr,
         nullptr,
@@ -231,7 +231,7 @@ bool ESpriteRendererComponent::initializeShader(const TCHAR* vsFilename, const T
     );
 
     //픽셀 셰이더 컴파일
-    HRESULT hr2 = D3DX11CompileFromFile(
+    HRESULT hr2 = D3DX11CompileFromFileW(
         psFilename,
         nullptr,
         nullptr,
@@ -271,8 +271,6 @@ bool ESpriteRendererComponent::initializeShader(const TCHAR* vsFilename, const T
     HRESULT hr = DX11.GetDevice()->CreateBuffer(&matrixBufferDesc, NULL, &m_MatrixBuffer);
     if (FAILED(hr)) { return false; }
 
-    pBlobVs->Release();
-    pBlobPs->Release();
     SAFE_RELEASE(pBlobVs);
     SAFE_RELEASE(pBlobPs);
 

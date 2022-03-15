@@ -14,6 +14,8 @@ public:
 	bool Init(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen,
 		float screenDepth, float screenNear);
 	bool Resize();
+	bool Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen, float screenDepth, float screenNear);
+
 
 	//Render
 	void BeginScene(float red, float green, float blue, float alpha);

@@ -1,34 +1,34 @@
 
-struct VS_INPUT
-{
-	float4 position : POSITION;
-    float2 color : COLOR;
-};
-
-struct VS_OUTPUT
-{
-	float4 position : SV_POSITION;
-	float2 color : COLOR;
-};
-
-cbuffer MatrixBuffer
+cbuffer matrixbuffer
 {
     matrix worldMatrix;
     matrix viewMatrix;
     matrix projectionMatrix;
 };
 
-VS_OUTPUT main(VS_INPUT Input)
+struct VertexInputType
 {
-	VS_OUTPUT Output;
+    float4 position : POSITION;
+    float4 color : COLOR;
+};
+
+struct PixelInputType
+{
+    float4 position : SV_POSITION;
+    float4 color : COLOR;
+};
+
+PixelInputType main(VertexInputType input)
+{
+    PixelInputType output;
+
+    input.position.w = 1.0f;
+
+    output.position = mul(input.position, worldMatrix);
+    output.position = mul(input.position, viewMatrix);
+    output.position = mul(input.position, projectionMatrix);
     
-    Input.position.w = 1;
+    output.color = input.color;
     
-    Output.position = mul(Input.position, worldMatrix);
-    Output.position = mul(Input.position, viewMatrix);
-    Output.position = mul(Input.position, projectionMatrix);
-	
-    Output.color = Input.color;
-    
-	return Output;
+    return output;
 }

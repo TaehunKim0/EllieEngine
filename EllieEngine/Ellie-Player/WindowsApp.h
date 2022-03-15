@@ -146,7 +146,7 @@ namespace WindowsApp
 			}
 			else
 			{
-				DX11.BeginScene(0.f,0.f,0.f,1.f);
+				DX11.BeginScene(0.0f, 0.0f, 0.0f, 1.f);
 
 				CORE.GetCore(CameraMgr)->Tick();
 				CORE.GetCore(SceneMgr)->Tick();
