@@ -2,14 +2,14 @@
 
 Dx11::Dx11()
 {
-	m_SwapChain = nullptr;
-	m_Device = nullptr;
-	m_ImmediateContext = nullptr;
-	m_RenderTargetView = nullptr;
-	m_DepthStencilBuffer = nullptr;
-	m_DepthStencilState = nullptr;
-	m_DepthStencilView = nullptr;
-	m_RasterState = nullptr;
+	_SwapChain = nullptr;
+	_Device = nullptr;
+	_ImmediateContext = nullptr;
+	_RenderTargetView = nullptr;
+	_DepthStencilBuffer = nullptr;
+	_DepthStencilState = nullptr;
+	_DepthStencilView = nullptr;
+	_RasterState = nullptr;
 }
 
 Dx11::~Dx11()
@@ -19,8 +19,8 @@ Dx11::~Dx11()
 
 bool Dx11::Init(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool fullscreen, float screenDepth, float screenNear)
 {
-    m_ScreenWidth = screenWidth;
-    m_ScreenHeight = screenHeight;
+    _ScreenWidth = screenWidth;
+    _ScreenHeight = screenHeight;
 
 	//*1. D3D 디바이스 설정*//
 	D3D_FEATURE_LEVEL featureLevel;
@@ -31,9 +31,9 @@ bool Dx11::Init(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool f
 		0,
 		0, 0,              // default feature level array
 		D3D11_SDK_VERSION,
-		&this->m_Device,
+		&this->_Device,
 		&featureLevel,
-		&this->m_ImmediateContext);	
+		&this->_ImmediateContext);	
 
 	if (FAILED(hr))
 	{
@@ -49,8 +49,8 @@ bool Dx11::Init(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool f
 	
 
 	//*2. 4X MSAA 품질 수준 지원 점검(안티엘리어싱)*//
-	m_Device->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &this->m_4xMsaaQuality);
-	assert(m_4xMsaaQuality > 0);
+	_Device->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &this->_4xMsaaQuality);
+	assert(_4xMsaaQuality > 0);
 
 	//*3. 후면 버퍼 설정*//
 	DXGI_SWAP_CHAIN_DESC sd;
@@ -62,10 +62,10 @@ bool Dx11::Init(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool f
 	sd.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
 	sd.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
 
-	if (m_EnableMsaa == true)
+	if (_EnableMsaa == true)
 	{
 		sd.SampleDesc.Count = 4;
-		sd.SampleDesc.Quality = m_4xMsaaQuality - 1;
+		sd.SampleDesc.Quality = _4xMsaaQuality - 1;
 	}
 	else
 	{
@@ -82,25 +82,25 @@ bool Dx11::Init(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool f
 
 	//*4. 후면 버퍼 생성*//
 	IDXGIDevice* dxgiDevice = 0;
-	m_Device->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice);
+	_Device->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice);
 	IDXGIAdapter* dxgiAdapter = 0;
 	dxgiDevice->GetParent(__uuidof(IDXGIAdapter), (void**)&dxgiAdapter);
 	IDXGIFactory* dxgiFactory = 0;
 	dxgiAdapter->GetParent(__uuidof(IDXGIFactory), (void**)&dxgiFactory);
 
-	HRESULT hrr = dxgiFactory->CreateSwapChain(m_Device, &sd, &m_SwapChain);
+	HRESULT hrr = dxgiFactory->CreateSwapChain(_Device, &sd, &_SwapChain);
 	if (FAILED(hrr))
 	{
 		MessageBox(0, _T("D3D11 Create SwapChain Failed."), 0, 0);
 		return false;
 	}
 
-	float fieldOfView = (float)XM_PI / 4.0f;
+	float fieldOfView = (float)D3DX_PI / 4.0f;
 	float screenAspect = (float)screenWidth / (float)screenHeight;
 
-	m_ProjectionMatrix = XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth);
-	m_WorldMatrix = XMMatrixIdentity();
-	m_Vsync_Enabled = false;
+	_ProjectionMatrix = XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth);
+	_WorldMatrix = XMMatrixIdentity();
+	_Vsync_Enabled = false;
 
 	SAFE_RELEASE(dxgiDevice);
 	SAFE_RELEASE(dxgiAdapter);
@@ -114,35 +114,35 @@ bool Dx11::Init(int screenWidth, int screenHeight, bool vsync, HWND hwnd, bool f
 
 bool Dx11::Resize()
 {
-    assert(m_ImmediateContext);
-    assert(m_Device);
-    assert(m_SwapChain);
+    assert(_ImmediateContext);
+    assert(_Device);
+    assert(_SwapChain);
 
 	//*5. 렌더 타겟 뷰 설정*//
-    m_SwapChain->ResizeBuffers(1, m_ScreenWidth, m_ScreenHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0);
+    _SwapChain->ResizeBuffers(1, _ScreenWidth, _ScreenHeight, DXGI_FORMAT_R8G8B8A8_UNORM, 0);
     ID3D11Texture2D* backBuffer;
 
-    m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&backBuffer));
+    _SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&backBuffer));
 
-    m_Device->CreateRenderTargetView(backBuffer, 0, &m_RenderTargetView);
+    _Device->CreateRenderTargetView(backBuffer, 0, &_RenderTargetView);
 
     SAFE_RELEASE(backBuffer);
 
 	//*6. 깊이 - 스텐실 버퍼와 뷰 생성*//
     D3D11_TEXTURE2D_DESC depthStencilDesc;
 
-    depthStencilDesc.Width = m_ScreenWidth;
-    depthStencilDesc.Height = m_ScreenHeight;
+    depthStencilDesc.Width = _ScreenWidth;
+    depthStencilDesc.Height = _ScreenHeight;
     depthStencilDesc.MipLevels = 1;
     depthStencilDesc.ArraySize = 1;
     depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
     // Use 4X MSAA? --must match swap chain MSAA values.
     // 4X MSAA를 사용하는가? --반드시 교환 사슬의 MSAA 설정과 일치해야 함.
-    if (m_EnableMsaa)
+    if (_EnableMsaa)
     {
         depthStencilDesc.SampleDesc.Count = 4;
-        depthStencilDesc.SampleDesc.Quality = m_4xMsaaQuality - 1;
+        depthStencilDesc.SampleDesc.Quality = _4xMsaaQuality - 1;
     }
     else
     {
@@ -155,21 +155,21 @@ bool Dx11::Resize()
     depthStencilDesc.CPUAccessFlags = 0;
     depthStencilDesc.MiscFlags = 0;
 
-    m_Device->CreateTexture2D(&depthStencilDesc, 0, &m_DepthStencilBuffer);       
-    m_Device->CreateDepthStencilView(m_DepthStencilBuffer, 0, &m_DepthStencilView);
+    _Device->CreateTexture2D(&depthStencilDesc, 0, &_DepthStencilBuffer);       
+    _Device->CreateDepthStencilView(_DepthStencilBuffer, 0, &_DepthStencilView);
 
 	//*7. 뷰들을 출력 병합기 단계에 묶기*//
-    m_ImmediateContext->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView);
+    _ImmediateContext->OMSetRenderTargets(1, &_RenderTargetView, _DepthStencilView);
 
 	//*8. 뷰포트 설정*//
-    m_Viewport.TopLeftX = 0;
-	m_Viewport.TopLeftY = 0;
-	m_Viewport.Width = static_cast<float>(m_ScreenWidth);
-	m_Viewport.Height = static_cast<float>(m_ScreenHeight);
-	m_Viewport.MinDepth = 0.0f;
-	m_Viewport.MaxDepth = 1.0f;
+    _Viewport.TopLeftX = 0;
+	_Viewport.TopLeftY = 0;
+	_Viewport.Width = static_cast<float>(_ScreenWidth);
+	_Viewport.Height = static_cast<float>(_ScreenHeight);
+	_Viewport.MinDepth = 0.0f;
+	_Viewport.MaxDepth = 1.0f;
 
-    m_ImmediateContext->RSSetViewports(1, &m_Viewport);
+    _ImmediateContext->RSSetViewports(1, &_Viewport);
 
 	return true;
 }
@@ -194,10 +194,10 @@ bool Dx11::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, 
 	float fieldOfView, screenAspect;
 	D3D11_DEPTH_STENCIL_DESC depthDisabledStencilDesc;
 
-	m_Vsync_Enabled = vsync;
-	m_ScreenWidth = screenWidth;
-	m_ScreenHeight = screenHeight;
-	m_Hwnd = hwnd;
+	_Vsync_Enabled = vsync;
+	_ScreenWidth = screenWidth;
+	_ScreenHeight = screenHeight;
+	_Hwnd = hwnd;
 
 	result = CreateDXGIFactory(__uuidof(IDXGIFactory), (void**)&factory);
 	if (FAILED(result))
@@ -217,7 +217,7 @@ bool Dx11::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, 
 		return false;
 	}
 
-	result = adapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, NULL);
+	result = adapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_SCALING, &numModes, NULL);
 	if (FAILED(result))
 	{
 		return false;
@@ -253,7 +253,7 @@ bool Dx11::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, 
 		return false;
 	}
 
-	m_VideoCardMemory = (int)(adapterDesc.DedicatedVideoMemory / 1024 / 1024);
+	_VideoCardMemory = (int)(adapterDesc.DedicatedVideoMemory / 1024 / 1024);
 
 	delete[] displayModeList;
 	displayModeList = 0;
@@ -276,7 +276,7 @@ bool Dx11::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, 
 
 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 
-	if (m_Vsync_Enabled)
+	if (_Vsync_Enabled)
 	{
 		swapChainDesc.BufferDesc.RefreshRate.Numerator = numerator;
 		swapChainDesc.BufferDesc.RefreshRate.Denominator = denominator;
@@ -313,19 +313,19 @@ bool Dx11::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, 
 	featureLevel = D3D_FEATURE_LEVEL_11_0;
 
 	result = D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, 0, &featureLevel, 1,
-		D3D11_SDK_VERSION, &swapChainDesc, &m_SwapChain, &m_Device, NULL, &m_ImmediateContext);
+		D3D11_SDK_VERSION, &swapChainDesc, &_SwapChain, &_Device, NULL, &_ImmediateContext);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
-	result = m_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBufferPtr);
+	result = _SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&backBufferPtr);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
-	result = m_Device->CreateRenderTargetView(backBufferPtr, NULL, &m_RenderTargetView);
+	result = _Device->CreateRenderTargetView(backBufferPtr, NULL, &_RenderTargetView);
 	if (FAILED(result))
 	{
 		return false;
@@ -348,7 +348,7 @@ bool Dx11::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, 
 	depthBufferDesc.CPUAccessFlags = 0;
 	depthBufferDesc.MiscFlags = 0;
 
-	result = m_Device->CreateTexture2D(&depthBufferDesc, NULL, &m_DepthStencilBuffer);
+	result = _Device->CreateTexture2D(&depthBufferDesc, NULL, &_DepthStencilBuffer);
 	if (FAILED(result))
 	{
 		return false;
@@ -374,13 +374,13 @@ bool Dx11::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, 
 	depthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
 	depthStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 
-	result = m_Device->CreateDepthStencilState(&depthStencilDesc, &m_DepthStencilState);
+	result = _Device->CreateDepthStencilState(&depthStencilDesc, &_DepthStencilState);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
-	m_ImmediateContext->OMSetDepthStencilState(m_DepthStencilState, 1);
+	_ImmediateContext->OMSetDepthStencilState(_DepthStencilState, 1);
 
 	ZeroMemory(&depthStencilViewDesc, sizeof(depthStencilViewDesc));
 
@@ -388,13 +388,13 @@ bool Dx11::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, 
 	depthStencilViewDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	depthStencilViewDesc.Texture2D.MipSlice = 0;
 
-	result = m_Device->CreateDepthStencilView(m_DepthStencilBuffer, &depthStencilViewDesc, &m_DepthStencilView);
+	result = _Device->CreateDepthStencilView(_DepthStencilBuffer, &depthStencilViewDesc, &_DepthStencilView);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
-	m_ImmediateContext->OMSetRenderTargets(1, &m_RenderTargetView, m_DepthStencilView);
+	_ImmediateContext->OMSetRenderTargets(1, &_RenderTargetView, _DepthStencilView);
 
 	rasterDesc.AntialiasedLineEnable = false;
 	rasterDesc.CullMode = D3D11_CULL_BACK;
@@ -407,13 +407,13 @@ bool Dx11::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, 
 	rasterDesc.ScissorEnable = false;
 	rasterDesc.SlopeScaledDepthBias = 0.0f;
 
-	result = m_Device->CreateRasterizerState(&rasterDesc, &m_RasterState);
+	result = _Device->CreateRasterizerState(&rasterDesc, &_RasterState);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
-	m_ImmediateContext->RSSetState(m_RasterState);
+	_ImmediateContext->RSSetState(_RasterState);
 
 	rasterDesc.AntialiasedLineEnable = false;
 	rasterDesc.CullMode = D3D11_CULL_NONE;
@@ -426,28 +426,28 @@ bool Dx11::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, 
 	rasterDesc.ScissorEnable = false;
 	rasterDesc.SlopeScaledDepthBias = 0.0f;
 
-	result = m_Device->CreateRasterizerState(&rasterDesc, &m_RasterStateNoCulling);
+	result = _Device->CreateRasterizerState(&rasterDesc, &_RasterStateNoCulling);
 	if (FAILED(result))
 	{
 		return false;
 	}
 
-	m_Viewport.Width = (float)screenWidth;
-	m_Viewport.Height = (float)screenHeight;
-	m_Viewport.MinDepth = 0.0f;
-	m_Viewport.MaxDepth = 1.0f;
-	m_Viewport.TopLeftX = 0.0f;
-	m_Viewport.TopLeftY = 0.0f;
+	_Viewport.Width = (float)screenWidth;
+	_Viewport.Height = (float)screenHeight;
+	_Viewport.MinDepth = 0.0f;
+	_Viewport.MaxDepth = 1.0f;
+	_Viewport.TopLeftX = 0.0f;
+	_Viewport.TopLeftY = 0.0f;
 
-	m_ImmediateContext->RSSetViewports(1, &m_Viewport);
+	_ImmediateContext->RSSetViewports(1, &_Viewport);
 
-	fieldOfView = (float)XM_PI / 4.0f;
+	fieldOfView = (float)D3DX_PI / 4.0f;
 	screenAspect = (float)screenWidth / (float)screenHeight;
 
 	//Matrix Setting
-	m_ProjectionMatrix = XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth);
-	m_WorldMatrix = XMMatrixIdentity();
-	m_OrthoMatrix = XMMatrixOrthographicLH((float)screenWidth, (float)screenHeight, screenNear, screenDepth);
+	_ProjectionMatrix = XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth);
+	_WorldMatrix = XMMatrixIdentity();
+	_OrthoMatrix = XMMatrixOrthographicLH((float)screenWidth, (float)screenHeight, screenNear, screenDepth);
 
 	ZeroMemory(&depthDisabledStencilDesc, sizeof(depthDisabledStencilDesc));
 
@@ -466,7 +466,7 @@ bool Dx11::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hwnd, 
 	depthDisabledStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
 	depthDisabledStencilDesc.BackFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 
-	result = m_Device->CreateDepthStencilState(&depthDisabledStencilDesc, &m_DepthDisabledStencilState);
+	result = _Device->CreateDepthStencilState(&depthDisabledStencilDesc, &_DepthDisabledStencilState);
 	if (FAILED(result))
 	{
 		return false;
@@ -484,39 +484,39 @@ void Dx11::BeginScene(float red, float green, float blue, float alpha)
 	color[2] = blue;
 	color[3] = alpha;
 
-	m_ImmediateContext->ClearRenderTargetView(m_RenderTargetView, color);
-	m_ImmediateContext->ClearDepthStencilView(m_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+	_ImmediateContext->ClearRenderTargetView(_RenderTargetView, color);
+	_ImmediateContext->ClearDepthStencilView(_DepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
 void Dx11::EndScene()
 {
 	// 렌더링이 완료되었으므로 백버퍼의 내용을 화면에 표시합니다.
-	if(m_Vsync_Enabled)
+	if(_Vsync_Enabled)
 	{ // 새로고침 비율을 고정합니다.
-		m_SwapChain->Present(1, 0); 
+		_SwapChain->Present(1, 0); 
 	} 
 	else 
 	{ 
 		// 가능한 한 빠르게 표시합니다.
-		m_SwapChain->Present(0, 0); 
+		_SwapChain->Present(0, 0); 
 	}
 }
 
 void Dx11::Release()
 {
 	//해제
-	SAFE_RELEASE(m_RenderTargetView);
-	SAFE_RELEASE(m_DepthStencilBuffer);
-	SAFE_RELEASE(m_SwapChain);
-	SAFE_RELEASE(m_DepthStencilView);
-	SAFE_RELEASE(m_RasterState);
-	SAFE_RELEASE(m_DepthStencilState);
-	SAFE_RELEASE(m_DepthStencilBuffer);
+	SAFE_RELEASE(_RenderTargetView);
+	SAFE_RELEASE(_DepthStencilBuffer);
+	SAFE_RELEASE(_SwapChain);
+	SAFE_RELEASE(_DepthStencilView);
+	SAFE_RELEASE(_RasterState);
+	SAFE_RELEASE(_DepthStencilState);
+	SAFE_RELEASE(_DepthStencilBuffer);
 
-	if(m_ImmediateContext)
-		m_ImmediateContext->ClearState();
+	if(_ImmediateContext)
+		_ImmediateContext->ClearState();
 		
-	SAFE_RELEASE(m_ImmediateContext);
-	SAFE_RELEASE(m_Device);
+	SAFE_RELEASE(_ImmediateContext);
+	SAFE_RELEASE(_Device);
 
 }

@@ -1,32 +1,33 @@
 #pragma once
 
-#include "EObject.h"
 #include <typeinfo>
 
 class EGameObject;
-class EComponent: public EObject
+class EComponent
 {
 public:
-	EComponent();
-	virtual ~EComponent();
+	EComponent() {};
+	virtual ~EComponent() {};
 
 public:
-	virtual bool Init();
-	virtual void Tick();
+	virtual bool Init() { return false; };
+	virtual void Tick() {};
+	virtual void Excute() {};
+	virtual void Destroy() {};
 
 public:
-	void SetRootObject(EGameObject* object) { m_RootObject = object; }
-	virtual void SetIsEnable(bool enable) { m_bIsEnable = enable; };
-	void SetComponentType(std::string type) { m_ComponentType = type; }
+	void SetRootObject(EGameObject* object) { _RootObject = object; }
+	virtual void SetIsEnable(bool enable) { _bIsEnable = enable; };
+	void SetComponentType(std::string type) { _ComponentType = type; }
 
-	virtual EGameObject* GetRootComponent() const { return m_RootObject; }
-	virtual bool GetIsEnable() const { return m_bIsEnable;  }
-	const std::string& GetComponentType() const { return m_ComponentType; }
+	virtual EGameObject* GetRootComponent() const { return _RootObject; }
+	virtual bool GetIsEnable() const { return _bIsEnable;  }
+	const std::string& GetComponentType() const { return _ComponentType; }
 
 private:
-	EGameObject* m_RootObject = nullptr;
-	bool m_bIsEnable = true;
-	std::string m_ComponentType;
+	EGameObject* _RootObject = nullptr;
+	bool _bIsEnable = true;
+	std::string _ComponentType;
 
 };
 

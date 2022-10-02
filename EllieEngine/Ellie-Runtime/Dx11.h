@@ -25,51 +25,51 @@ public:
 	void Release();
 
 	ID3D11Device* GetDevice() {
-		return m_Device;
+		return _Device;
 	}
 	ID3D11DeviceContext* GetDeviceContext() {
-		return m_ImmediateContext;
+		return _ImmediateContext;
 	}
 	const HWND GetHWND() {
-		return m_Hwnd;
+		return _Hwnd;
 	}
 
 	void GetWorldMatrix(Mat4x4 outWorldMatrix) {
-		outWorldMatrix = m_WorldMatrix;
+		outWorldMatrix = _WorldMatrix;
 	}
 	void GetProjectionMatrix(Mat4x4 outProjectionMatrix) {
-		outProjectionMatrix = m_ProjectionMatrix;
+		outProjectionMatrix = _ProjectionMatrix;
 	}
 
 private:
-	bool m_Vsync_Enabled;
-	int m_VideoCardMemory;
-	char m_VideoCardDescription[128];
-	UINT m_4xMsaaQuality;
-	bool m_EnableMsaa;
-	int m_ScreenWidth;
-	int m_ScreenHeight;
+	bool _Vsync_Enabled;
+	int _VideoCardMemory;
+	char _VideoCardDescription[128];
+	UINT _4xMsaaQuality;
+	bool _EnableMsaa;
+	int _ScreenWidth;
+	int _ScreenHeight;
 
 private:
-	HWND m_Hwnd;
+	HWND _Hwnd;
 
-	IDXGISwapChain* m_SwapChain;
-	ID3D11Device* m_Device;
-	ID3D11DeviceContext* m_ImmediateContext;
+	IDXGISwapChain* _SwapChain;
+	ID3D11Device* _Device;
+	ID3D11DeviceContext* _ImmediateContext;
 
-	ID3D11RenderTargetView* m_RenderTargetView;
-	ID3D11Texture2D* m_DepthStencilBuffer;
+	ID3D11RenderTargetView* _RenderTargetView;
+	ID3D11Texture2D* _DepthStencilBuffer;
 
-	ID3D11DepthStencilState* m_DepthStencilState;
-	ID3D11DepthStencilView* m_DepthStencilView;
-	ID3D11DepthStencilState* m_DepthDisabledStencilState;
+	ID3D11DepthStencilState* _DepthStencilState;
+	ID3D11DepthStencilView* _DepthStencilView;
+	ID3D11DepthStencilState* _DepthDisabledStencilState;
 
-	ID3D11RasterizerState* m_RasterState;
-	ID3D11RasterizerState* m_RasterStateNoCulling;
+	ID3D11RasterizerState* _RasterState;
+	ID3D11RasterizerState* _RasterStateNoCulling;
 
-	Mat4x4 m_ProjectionMatrix;
-	Mat4x4 m_WorldMatrix;
-	Mat4x4 m_OrthoMatrix;
+	Mat4x4 _ProjectionMatrix;
+	Mat4x4 _WorldMatrix;
+	Mat4x4 _OrthoMatrix;
 
-	D3D11_VIEWPORT m_Viewport;
+	D3D11_VIEWPORT _Viewport;
 };

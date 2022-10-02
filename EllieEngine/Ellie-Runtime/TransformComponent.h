@@ -1,46 +1,45 @@
 #pragma once
 #include "EComponent.h"
-
-
+#include "Rotator.h"
 
 class ETransformComponent : public EComponent
 {
 public:
-	ETransformComponent();
-	virtual ~ETransformComponent();
+	ETransformComponent() {}
+	virtual ~ETransformComponent() {}
 
 public:
-	bool Init() final;
-	void Tick() final;
-	void Excute() final;
+	void SetPosition(const Vec3& InPos) { _Position = InPos; }
+	void SetRotation(const Rotator& InRotation) { _Rotation = InRotation; }
+	void SetScale(const Vec3& InScale) { _Scale = InScale; }
 
-public:
-	void SetPosition(float x, float y, float z) {
-		m_Position.x = x; m_Position.y = y; m_Position.z = z;
-	}
+	void AddYawRotation(const float InDegree) { _Rotation.Yaw += InDegree; }
+	void AddPitchRotation(const float InDegree) { _Rotation.Pitch += InDegree; }
+	void AddRollRotation(const float InDegree) { _Rotation.Roll += InDegree; }
 
-	Vec3 GetPosition() {
-		return m_Position;
-	}
-	Vec3 GetRotation() {
-		return m_Rotation;
-	}
-	Vec3 GetScale() {
-		return m_Scale;
-	}
-
-	void GetMatrix(Mat4x4 outWorld, Mat4x4 outView, Mat4x4 outProjection) {
-		outWorld = m_WorldMatrix;
-		outView = m_ViewMatrix;
-		outProjection = m_ProjectionMatrix;
-	}
+	Vec3 GetPosition() { return _Position; }
+	Rotator GetRotation() { return _Rotation; }
+	Vec3 GetScale() { return _Scale; }
 
 private:
-	Mat4x4 m_WorldMatrix;
-	Mat4x4 m_ViewMatrix;
-	Mat4x4 m_ProjectionMatrix;
+	FORCEINLINE Mat4x4 GetWorldMatrix()const;
 
-	Vec3 m_Scale;
-	Vec3 m_Rotation;
-	Vec3 m_Position;
+public:
+	bool Init() { return false; }
+	void Tick() {}
+	void Excute() {}
+
+private:
+	Vec3 _Scale;
+	Vec3 _Position;
+	Rotator _Rotation;
+
+	Vec3 _Right;
+	Vec3 _Left;
+	Vec3 _Up;
 };
+
+FORCEINLINE Mat4x4 ETransformComponent::GetWorldMatrix() const
+{
+	
+}

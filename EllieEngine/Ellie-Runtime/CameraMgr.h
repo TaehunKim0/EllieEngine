@@ -24,7 +24,7 @@ public:
 	void GetBaseViewMatrix(Mat4x4& viewMatrix);
 
 private:
-	Vec3 m_Position;
-	Vec3 m_Rotation;
-	Mat4x4 m_ViewMatrix, m_BaseViewMatrix;
+	Vec3 _Position;
+	Vec3 _Rotation;
+	Mat4x4 _ViewMatrix, _BaseViewMatrix;
 };

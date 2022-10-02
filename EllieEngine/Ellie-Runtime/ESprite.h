@@ -14,7 +14,7 @@ public:
 
 public:
 	void Begin() final;
-	void Tick() final;
+	void Update() final;
 
 	void Excute() final;
 	void Destroy() final;
@@ -22,17 +22,19 @@ public:
 public:
 	bool CreateTexture(ID3D11Device* g_pDevice, const WCHAR* path);
 	ID3D11ShaderResourceView* GetTexture() {
-		return m_Texture->GetTexture();
+		return _Texture->GetTexture();
 	}
-	void GetMatrix(Mat4x4 outWorld, Mat4x4 outView, Mat4x4 outProjection) {
-		m_TransformComponent->GetMatrix(outWorld, outView, outProjection);
-	}
+
 	ID3D11SamplerState** GetSamplerState() {
-		return &m_SampleState;
+		return &_SampleState;
+	}
+
+	ETransformComponent& GetTransform() {
+		return _TransformComponent;
 	}
 
 private:
-	ETransformComponent* m_TransformComponent;
-	ID3D11SamplerState* m_SampleState;
-	ETexture* m_Texture;
+	ETransformComponent _TransformComponent;
+	ID3D11SamplerState* _SampleState;
+	ETexture* _Texture;
 };

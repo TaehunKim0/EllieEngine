@@ -9,33 +9,33 @@
 void EllieCore::CreateCores()
 {
 	//게임 오브젝트 관리
-	m_GameObjectMgr = new GameObjectMgr();
-	m_Managers.push_back(m_GameObjectMgr);
+	_GameObjectMgr = new GameObjectMgr();
+	_Managers.push_back(_GameObjectMgr);
 
 	//카메라 관리
-	m_CameraMgr = new CameraMgr();
-	m_Managers.push_back(m_CameraMgr);
+	_CameraMgr = new CameraMgr();
+	_Managers.push_back(_CameraMgr);
 	
 	//씬 관리
-	m_SceneMgr = new SceneMgr();
-	m_Managers.push_back(m_SceneMgr);
+	_SceneMgr = new SceneMgr();
+	_Managers.push_back(_SceneMgr);
 
 }
 
 void EllieCore::Init()
 {
-	for (const auto& core : m_Managers)
+	for (const auto& core : _Managers)
 		core->Init();
 }
 
 void EllieCore::Tick()
 {
-	for (const auto& core : m_Managers)
+	for (const auto& core : _Managers)
 		core->Tick();
 }
 
 void EllieCore::Excute()
 {
-	for (const auto& core : m_Managers)
+	for (const auto& core : _Managers)
 		core->Excute();
 }

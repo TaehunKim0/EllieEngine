@@ -35,8 +35,7 @@ private:
 	void renderBuffer();
 
 private:
-	ETransformComponent* m_TransformComponent;
-	ESprite* m_Sprite;
+	ESprite* _Sprite;
 
 	struct VertexType
 	{
@@ -46,14 +45,14 @@ private:
 
 	struct MatrixBufferType { Mat4x4 world; Mat4x4 view; Mat4x4 projection; };
 
-	ID3D11Buffer* m_VertexBuffer;
-	ID3D11Buffer* m_IndexBuffer;
-	ID3D11Buffer* m_MatrixBuffer;
+	ID3D11Buffer* _VertexBuffer;
+	ID3D11Buffer* _IndexBuffer;
+	ID3D11Buffer* _MatrixBuffer;
 
-	ID3D11VertexShader* m_VertexShader;
-	ID3D11PixelShader* m_PixelShader;
-	ID3D11InputLayout* m_InputLayout;
+	ID3D11VertexShader* _VertexShader;
+	ID3D11PixelShader* _PixelShader;
+	ID3D11InputLayout* _InputLayout;
 
-	int m_VertexCount;
-	int m_IndexCount;
+	int _VertexCount;
+	int _IndexCount;
 };

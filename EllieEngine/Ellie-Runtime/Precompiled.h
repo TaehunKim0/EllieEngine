@@ -15,13 +15,14 @@
 #include <string>
 #include <D3DX11tex.h>
 #include <d3dx9math.h>
+#include <wrl.h>
 
 //*using*//
 using namespace DirectX;
+using Microsoft::WRL::ComPtr;
 
 //*Custom Class*//
 #include "Dx11.h"
 #include "EllieCore.h"
-#include "Matrix.h"
-#include "Vector.h"
+#include "MathHeaders.h"
 #include "MacroDef.h"

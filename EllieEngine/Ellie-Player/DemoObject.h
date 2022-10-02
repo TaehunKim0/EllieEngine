@@ -8,7 +8,7 @@ class DemoObject : public EGameObject
 {
 public:
 	void Begin() final;
-	void Tick() final;
+	void Update() final;
 
 	void Excute() final;
 	void Destroy() final;

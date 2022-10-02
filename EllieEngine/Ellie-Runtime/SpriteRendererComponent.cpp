@@ -4,10 +4,10 @@
 
 ESpriteRendererComponent::ESpriteRendererComponent()
 {
-    m_VertexShader = 0;
-    m_PixelShader = 0;
-    m_InputLayout = 0;
-    m_MatrixBuffer = 0;
+    _VertexShader = 0;
+    _PixelShader = 0;
+    _InputLayout = 0;
+    _MatrixBuffer = 0;
 }
 
 ESpriteRendererComponent::~ESpriteRendererComponent()
@@ -36,12 +36,12 @@ void ESpriteRendererComponent::Tick()
 
 void ESpriteRendererComponent::Excute()
 {
-    SAFE_RELEASE(m_VertexBuffer);
-    SAFE_RELEASE(m_IndexBuffer);
-    SAFE_RELEASE(m_VertexShader);
-    SAFE_RELEASE(m_PixelShader);
-    SAFE_RELEASE(m_InputLayout);
-    SAFE_RELEASE(m_MatrixBuffer);
+    SAFE_RELEASE(_VertexBuffer);
+    SAFE_RELEASE(_IndexBuffer);
+    SAFE_RELEASE(_VertexShader);
+    SAFE_RELEASE(_PixelShader);
+    SAFE_RELEASE(_InputLayout);
+    SAFE_RELEASE(_MatrixBuffer);
 }
 
 void ESpriteRendererComponent::Destroy()
@@ -51,7 +51,7 @@ void ESpriteRendererComponent::Destroy()
 
 void ESpriteRendererComponent::SetSprite(ESprite* sprite)
 {
-    m_Sprite = sprite;
+    _Sprite = sprite;
 }
 
 void ESpriteRendererComponent::Render()
@@ -61,26 +61,29 @@ void ESpriteRendererComponent::Render()
     viewMatrix = XMMatrixIdentity();
     projectionMatrix = XMMatrixIdentity();
 
-    CORE.GetCameraMgrCore()->GetViewMatrix(viewMatrix);
+    /*CORE.GetCameraMgrCore()->GetViewMatrix(viewMatrix);
     DX11.GetWorldMatrix(worldMatrix);
-    DX11.GetProjectionMatrix(projectionMatrix);
+    DX11.GetProjectionMatrix(projectionMatrix);*/
+
+    ETransformComponent& transform = _Sprite->GetTransform();
+
 
     renderBuffer();
-    renderShader(worldMatrix, viewMatrix, projectionMatrix, m_Sprite->GetTexture());
+    renderShader(worldMatrix, viewMatrix, projectionMatrix, _Sprite->GetTexture());
 }
 
 void ESpriteRendererComponent::renderShader(Mat4x4 worldMatrix, Mat4x4 viewMatrix, Mat4x4 projectionMatrix, ID3D11ShaderResourceView* texture)
 {
     //셰이더 값을 지정합니다.
-    setShaderParameters(worldMatrix, viewMatrix, projectionMatrix, m_Sprite->GetTexture());
+    setShaderParameters(worldMatrix, viewMatrix, projectionMatrix, _Sprite->GetTexture());
 
     // 정점 입력 레이아웃을 설정합니다. 
-    DX11.GetDeviceContext()->IASetInputLayout(m_InputLayout);
+    DX11.GetDeviceContext()->IASetInputLayout(_InputLayout);
     // 삼각형을 그릴 정점 셰이더와 픽셀 셰이더를 설정합니다.   
-    DX11.GetDeviceContext()->VSSetShader(m_VertexShader, NULL, 0);
-    DX11.GetDeviceContext()->PSSetShader(m_PixelShader, NULL, 0);
+    DX11.GetDeviceContext()->VSSetShader(_VertexShader, NULL, 0);
+    DX11.GetDeviceContext()->PSSetShader(_PixelShader, NULL, 0);
     // 삼각형을 그립니다.
-    DX11.GetDeviceContext()->DrawIndexed(m_IndexCount, 0, 0);
+    DX11.GetDeviceContext()->DrawIndexed(_IndexCount, 0, 0);
 
     return;
 }
@@ -95,9 +98,9 @@ void ESpriteRendererComponent::renderBuffer()
     offset = 0;
 
     //생성한 버텍스 버퍼를 입력 레이아웃 스테이지(Input Assembler)에 활성화하여 그려질 수 있게 한다.
-    DX11.GetDeviceContext()->IASetVertexBuffers(0, 1, &m_VertexBuffer, &stride, &offset);
+    DX11.GetDeviceContext()->IASetVertexBuffers(0, 1, &_VertexBuffer, &stride, &offset);
     //인덱스 버퍼도 마찬가지로 설정한다.
-    DX11.GetDeviceContext()->IASetIndexBuffer(m_IndexBuffer, DXGI_FORMAT_R32_UINT, 0);
+    DX11.GetDeviceContext()->IASetIndexBuffer(_IndexBuffer, DXGI_FORMAT_R32_UINT, 0);
     //정점 버퍼로 그릴 기본형을 설정합니다.
     DX11.GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 }
@@ -118,10 +121,10 @@ bool ESpriteRendererComponent::initializeBuffer()
 bool ESpriteRendererComponent::initializeVertexBuffer()
 {
     //1.생성할 버텍스 버퍼의 데이터 형식을 정의하는 D3D11_BUFFER_DESC 구조체 선언
-    m_VertexCount = 3;
+    _VertexCount = 3;
     D3D11_BUFFER_DESC xyzBufferDesc;
     xyzBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-    xyzBufferDesc.ByteWidth = sizeof(VertexType) * m_VertexCount;
+    xyzBufferDesc.ByteWidth = sizeof(VertexType) * _VertexCount;
     xyzBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
     xyzBufferDesc.CPUAccessFlags = 0;
     xyzBufferDesc.MiscFlags = 0;
@@ -129,7 +132,7 @@ bool ESpriteRendererComponent::initializeVertexBuffer()
 
     //2.서브 리소스(리소스의 실제 데이터)의 초기화 데이터로 D3D11_SUBRESOURCE_DATA 구조체를 정의
     //2-1.서브 리소스 초기화
-    VertexType* vertices = new VertexType[m_VertexCount];
+    VertexType* vertices = new VertexType[_VertexCount];
     vertices[0].Position = Vec3(-0.5f, -0.50f, 0.0f);  // Bottom left.
     vertices[0].Color = Vec4(1.0f, 0.0f, 0.0f, 1.0f);
 
@@ -146,7 +149,7 @@ bool ESpriteRendererComponent::initializeVertexBuffer()
     xyzSubData.SysMemSlicePitch = 0;
 
     //3.CreateBuffer 호출
-    HRESULT result = DX11.GetDevice()->CreateBuffer(&xyzBufferDesc, &xyzSubData, &m_VertexBuffer);
+    HRESULT result = DX11.GetDevice()->CreateBuffer(&xyzBufferDesc, &xyzSubData, &_VertexBuffer);
     if (FAILED(result)) { return false; }
 
     delete[] vertices;
@@ -157,18 +160,18 @@ bool ESpriteRendererComponent::initializeVertexBuffer()
 bool ESpriteRendererComponent::initializeIndexBuffer()
 {
     //인덱스 버퍼도 버퍼리소스의 한 종류이므로 버텍스 버퍼와 생성방식이 비슷하다.
-    m_IndexCount = 3;
+    _IndexCount = 3;
     //1.인덱스 버퍼 정의
     D3D11_BUFFER_DESC idBufferDesc;
     idBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-    idBufferDesc.ByteWidth = sizeof(unsigned long) * m_IndexCount;
+    idBufferDesc.ByteWidth = sizeof(unsigned long) * _IndexCount;
     idBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
     idBufferDesc.CPUAccessFlags = 0;
     idBufferDesc.MiscFlags = 0;
     idBufferDesc.StructureByteStride = 0;
 
     //2.인덱스 버퍼 서브리소스 초기화
-    unsigned long* indices = new unsigned long[m_IndexCount];
+    unsigned long* indices = new unsigned long[_IndexCount];
     indices[0] = 0;
     indices[1] = 1;
     indices[2] = 2;
@@ -180,7 +183,7 @@ bool ESpriteRendererComponent::initializeIndexBuffer()
     idxSubData.SysMemSlicePitch = 0;
 
     //4.인덱스버퍼 생성
-    HRESULT result = DX11.GetDevice()->CreateBuffer(&idBufferDesc, &idxSubData, &m_IndexBuffer);
+    HRESULT result = DX11.GetDevice()->CreateBuffer(&idBufferDesc, &idxSubData, &_IndexBuffer);
     if (FAILED(result)) { return false; }
 
     delete[] indices;
@@ -200,7 +203,7 @@ bool ESpriteRendererComponent::initializeInputLayout(ID3D10Blob* pBlobVS)
 
     //위의 데이터를 가지고 입력 어셈블러 스테이지(IA)가 버텍스버퍼의 데이터를 어떻게 읽어들일까 지시하기 위해
     //입력 레이아웃 오브젝트를 생성해야 한다.
-    HRESULT hr = DX11.GetDevice()->CreateInputLayout(polygonLayout, numElements, pBlobVS->GetBufferPointer(), pBlobVS->GetBufferSize(), &m_InputLayout);
+    HRESULT hr = DX11.GetDevice()->CreateInputLayout(polygonLayout, numElements, pBlobVS->GetBufferPointer(), pBlobVS->GetBufferSize(), &_InputLayout);
     if (FAILED(hr)) return false;
 
     return true;
@@ -248,11 +251,11 @@ bool ESpriteRendererComponent::initializeShader(const TCHAR* vsFilename, const T
 
     //2.컴파일하면 ID3DBlob 인터페이스로 데이터가 넘어오는데 이걸로 버텍스,픽셀 셰이더 오브젝트를 만든다.
     hr1 = DX11.GetDevice()->CreateVertexShader(pBlobVs->GetBufferPointer(), pBlobVs->GetBufferSize(),
-        nullptr, &m_VertexShader);
+        nullptr, &_VertexShader);
     if (FAILED(hr1)) return false;
 
     hr2 = DX11.GetDevice()->CreatePixelShader(pBlobPs->GetBufferPointer(), pBlobPs->GetBufferSize(),
-        nullptr, &m_PixelShader);
+        nullptr, &_PixelShader);
     if (FAILED(hr2)) return false;
 
     //3.입력 레이아웃
@@ -268,7 +271,7 @@ bool ESpriteRendererComponent::initializeShader(const TCHAR* vsFilename, const T
     matrixBufferDesc.MiscFlags = 0;
     matrixBufferDesc.StructureByteStride = 0;
 
-    HRESULT hr = DX11.GetDevice()->CreateBuffer(&matrixBufferDesc, NULL, &m_MatrixBuffer);
+    HRESULT hr = DX11.GetDevice()->CreateBuffer(&matrixBufferDesc, NULL, &_MatrixBuffer);
     if (FAILED(hr)) { return false; }
 
     SAFE_RELEASE(pBlobVs);
@@ -281,7 +284,7 @@ bool ESpriteRendererComponent::setShaderParameters(Mat4x4 worldMatrix, Mat4x4 vi
 {
     D3D11_MAPPED_SUBRESOURCE mappedResource;
     //상수 버퍼를 쓰기 위해 잠급니다.
-    HRESULT result = DX11.GetDeviceContext()->Map(m_MatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
+    HRESULT result = DX11.GetDeviceContext()->Map(_MatrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
     if (FAILED(result)) return false;
 
     //상수 버퍼의 데이터에 대한 포인터를 가져옵니다.
@@ -294,13 +297,13 @@ bool ESpriteRendererComponent::setShaderParameters(Mat4x4 worldMatrix, Mat4x4 vi
     dataPtr->projection = XMMatrixTranspose(projectionMatrix);
 
     //상수 버퍼의 잠금을 풉니다.
-    DX11.GetDeviceContext()->Unmap(m_MatrixBuffer, 0);
+    DX11.GetDeviceContext()->Unmap(_MatrixBuffer, 0);
 
     //정점 셰이더에서 상수 버퍼의 위치를 설정합니다.
     unsigned int bufferNumber = 0;
 
     //업데이트된 값으로 정점 셰이더에서 상수 버퍼를 설정합니다.
-    DX11.GetDeviceContext()->VSSetConstantBuffers(bufferNumber, 1, &m_MatrixBuffer);
+    DX11.GetDeviceContext()->VSSetConstantBuffers(bufferNumber, 1, &_MatrixBuffer);
 
     return true;
 }

@@ -2,17 +2,14 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Precompiled.h" />
-    <ClInclude Include="EObject.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="EGameObject.h">
-      <Filter>Object</Filter>
+      <Filter>Core\Object</Filter>
     </ClInclude>
     <ClInclude Include="EComponent.h">
-      <Filter>Component</Filter>
+      <Filter>Core\Component</Filter>
     </ClInclude>
     <ClInclude Include="TransformComponent.h">
-      <Filter>Component</Filter>
+      <Filter>Core\Component</Filter>
     </ClInclude>
     <ClInclude Include="Matrix.h">
       <Filter>Core\Math</Filter>
@@ -20,115 +17,157 @@
     <ClInclude Include="Vector.h">
       <Filter>Core\Math</Filter>
     </ClInclude>
-    <ClInclude Include="EllieCore.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="IManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Dx11.h">
-      <Filter>Core</Filter>
+      <Filter>Core\Manager</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRendererComponent.h">
-      <Filter>Component</Filter>
+      <Filter>Core\Component</Filter>
     </ClInclude>
     <ClInclude Include="ESprite.h">
-      <Filter>Object</Filter>
+      <Filter>Core\Object</Filter>
     </ClInclude>
     <ClInclude Include="ETexture.h">
-      <Filter>Object</Filter>
+      <Filter>Core\Object</Filter>
     </ClInclude>
     <ClInclude Include="GameObjectMgr.h">
-      <Filter>Manager</Filter>
+      <Filter>Core\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Container.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="MacroDef.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="EllieProc.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="EResource.h">
-      <Filter>Object</Filter>
+      <Filter>Core\Manager</Filter>
     </ClInclude>
     <ClInclude Include="EScene.h">
-      <Filter>Object</Filter>
+      <Filter>Core\Object</Filter>
     </ClInclude>
     <ClInclude Include="SceneMgr.h">
-      <Filter>Manager</Filter>
+      <Filter>Core\Manager</Filter>
     </ClInclude>
     <ClInclude Include="CameraMgr.h">
-      <Filter>Manager</Filter>
+      <Filter>Core\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Rotator.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="MathHeaders.h">
+      <Filter>Core\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Dx11.h">
+      <Filter>Core\System</Filter>
+    </ClInclude>
+    <ClInclude Include="EllieCore.h">
+      <Filter>Core\System</Filter>
+    </ClInclude>
+    <ClInclude Include="EllieProc.h">
+      <Filter>Core\System</Filter>
+    </ClInclude>
+    <ClInclude Include="MacroDef.h">
+      <Filter>Core\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Core\System</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexBuffer.h">
+      <Filter>Core\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="IndexBuffer.h">
+      <Filter>Core\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="EMesh.h">
+      <Filter>Core\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleMesh.h">
+      <Filter>Core\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformBuffer.h">
+      <Filter>Core\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputLayout.h">
+      <Filter>Core\Buffers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Precompiled.cpp" />
-    <ClCompile Include="EObject.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="EGameObject.cpp">
-      <Filter>Object</Filter>
+      <Filter>Core\Object</Filter>
     </ClCompile>
     <ClCompile Include="EComponent.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="TransformComponent.cpp">
-      <Filter>Component</Filter>
-    </ClCompile>
-    <ClCompile Include="EllieCore.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Dx11.cpp">
-      <Filter>Core</Filter>
+      <Filter>Core\Component</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRendererComponent.cpp">
-      <Filter>Component</Filter>
+      <Filter>Core\Component</Filter>
     </ClCompile>
     <ClCompile Include="ESprite.cpp">
-      <Filter>Object</Filter>
+      <Filter>Core\Object</Filter>
     </ClCompile>
     <ClCompile Include="ETexture.cpp">
-      <Filter>Object</Filter>
+      <Filter>Core\Object</Filter>
     </ClCompile>
     <ClCompile Include="GameObjectMgr.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="EllieProc.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="EResource.cpp">
-      <Filter>Object</Filter>
+      <Filter>Core\Manager</Filter>
     </ClCompile>
     <ClCompile Include="EScene.cpp">
-      <Filter>Object</Filter>
+      <Filter>Core\Object</Filter>
     </ClCompile>
     <ClCompile Include="SceneMgr.cpp">
-      <Filter>Manager</Filter>
+      <Filter>Core\Manager</Filter>
     </ClCompile>
     <ClCompile Include="CameraMgr.cpp">
-      <Filter>Manager</Filter>
+      <Filter>Core\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Dx11.cpp">
+      <Filter>Core\System</Filter>
+    </ClCompile>
+    <ClCompile Include="EllieCore.cpp">
+      <Filter>Core\System</Filter>
+    </ClCompile>
+    <ClCompile Include="EllieProc.cpp">
+      <Filter>Core\System</Filter>
+    </ClCompile>
+    <ClCompile Include="IndexBuffer.cpp">
+      <Filter>Core\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexBuffer.cpp">
+      <Filter>Core\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="EMesh.cpp">
+      <Filter>Core\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleMesh.cpp">
+      <Filter>Core\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformBuffer.cpp">
+      <Filter>Core\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="InputLayout.cpp">
+      <Filter>Core\Buffers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Object">
-      <UniqueIdentifier>{1c690acc-2b66-465e-8dd8-e906302fcfb9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Manager">
-      <UniqueIdentifier>{d1861ed5-d3e1-4c34-8e54-ce49ef1ca3f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Component">
-      <UniqueIdentifier>{ce64c1aa-a764-4c78-8d27-24f9c8271d6b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{4232a053-545e-4db3-8707-6a6ebff6de76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\System">
+      <UniqueIdentifier>{6e3f806d-9786-4a81-9719-792a322757ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Component">
+      <UniqueIdentifier>{ce64c1aa-a764-4c78-8d27-24f9c8271d6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Manager">
+      <UniqueIdentifier>{d1861ed5-d3e1-4c34-8e54-ce49ef1ca3f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Object">
+      <UniqueIdentifier>{1c690acc-2b66-465e-8dd8-e906302fcfb9}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Core\Math">
       <UniqueIdentifier>{962a4a5b-70b1-43a1-b9f3-ef56b5f6868f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Shaders">
+      <UniqueIdentifier>{d4f0cfec-45c6-4cfc-a273-b23ad5b8fcc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Buffers">
+      <UniqueIdentifier>{3aaa50a7-29a5-4136-b468-5cd5ca792127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Mesh">
+      <UniqueIdentifier>{b1ec6f7f-c2a8-452c-935c-3fddb6ee3897}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

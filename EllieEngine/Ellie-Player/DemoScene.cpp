@@ -5,17 +5,17 @@
 
 void DemoScene::Init()
 {
-	m_BackgroundSprite = new ESprite;
-	m_BackgroundSprite->CreateTexture(DX11.GetDevice() , TEXT("../Resource/BackGround.png"));
-	
-	m_SpriteRenderer = CreateComponent<ESpriteRendererComponent>();
-	m_SpriteRenderer->Init();
-	m_SpriteRenderer->SetSprite(m_BackgroundSprite);
+
 }
 
-void DemoScene::Tick()
+void DemoScene::Update()
 {
-	m_SpriteRenderer->Render();
+
+}
+
+void DemoScene::Render() 
+{
+
 }
 
 void DemoScene::Excute()

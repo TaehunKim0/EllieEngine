@@ -15,9 +15,9 @@ void DemoObject::Begin()
 	m_SpriteRenderer->SetSprite(m_BackgroundSprite);
 }
 
-void DemoObject::Tick()
+void DemoObject::Update()
 {
-	EGameObject::Tick();
+	EGameObject::Update();
 }
 
 void DemoObject::Excute()

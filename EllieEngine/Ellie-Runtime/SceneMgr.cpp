@@ -3,34 +3,35 @@
 
 void SceneMgr::Init()
 {
-	if (m_Scene == nullptr)
+	if (_Scene == nullptr)
 		return;
 
-	m_Scene->Init();
+	_Scene->Init();
 }
 
 void SceneMgr::Tick()
 {
-	if (m_Scene == nullptr)
+	if (_Scene == nullptr)
 		return;
 
-	m_Scene->Tick();
+	_Scene->Update();
+	_Scene->Render();
 }
 
 void SceneMgr::Excute()
 {
-	m_Scene->Excute();
+	_Scene->Excute();
 }
 
 void SceneMgr::SetScene(EScene* scene)
 {
-    m_Scene = scene;
+    _Scene = scene;
 
-    if (m_Scene != nullptr)
-        m_Scene->Init();
+    if (_Scene != nullptr)
+        _Scene->Init();
 }
 
 EScene* SceneMgr::GetCurrentScene() const
 {
-	return m_Scene;
+	return _Scene;
 }

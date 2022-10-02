@@ -12,7 +12,7 @@ int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	}
 
 	WindowsApp::Show(WindowsApp::g_Handle);
-	WindowsApp::Tick();
+	WindowsApp::Update();
 
 	WindowsApp::Destroy();
 	return 0;

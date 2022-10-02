@@ -4,9 +4,9 @@
 
 
 EGameObject::EGameObject()
-    : m_bIsEnable(true),
-    m_bIsPendingKill(false),
-    m_Parent(nullptr)
+    : _bIsEnable(true),
+    _bIsPendingKill(false),
+    _Parent(nullptr)
 {
 }
 
@@ -18,12 +18,12 @@ void EGameObject::Begin()
 {
 }
 
-void EGameObject::Tick()
+void EGameObject::Update()
 {
-    if (false == m_bIsEnable)
+    if (false == _bIsEnable)
         return;
 
-    for (const auto& component : m_Components) {
+    for (const auto& component : _Components) {
         if (component == nullptr) continue;
 
         if (component->GetIsEnable())
@@ -35,21 +35,21 @@ void EGameObject::AddChild(EGameObject* child)
 {
     if (nullptr == child)
         return;
-    m_Children.push_back(child);
-    child->m_Parent = this;
+    _Children.push_back(child);
+    child->_Parent = this;
 }
 
 void EGameObject::RemoveChild(EGameObject* child)
 {
     if (nullptr == child)
         return;
-    m_Children.remove(child);
-    child->m_Parent = nullptr;
+    _Children.remove(child);
+    child->_Parent = nullptr;
 }
 
 void EGameObject::RemoveChildren()
 {
-    m_Children.clear();
+    _Children.clear();
 }
 
 void EGameObject::SetParent(EGameObject* parent)
@@ -59,28 +59,28 @@ void EGameObject::SetParent(EGameObject* parent)
 
 EGameObject* EGameObject::GetParent()
 {   
-    return m_Parent;
+    return _Parent;
 }
 
 void EGameObject::RemoveParent()
 {
-    m_Parent = nullptr;
+    _Parent = nullptr;
 }
 
 void EGameObject::AddComponent(EComponent* component)
 {
-    m_Components.push_back(component);
+    _Components.push_back(component);
     component->SetRootObject(this);
 }
 
 void EGameObject::DeleteComponent(EComponent* component)
 {
-    m_Components.remove(component);
+    _Components.remove(component);
 }
 
 bool EGameObject::InitializeComponent()
 {
-    for (const auto& component : m_Components)
+    for (const auto& component : _Components)
     {
         if (component->Init() == false)
             return false;
@@ -100,11 +100,11 @@ void EGameObject::Destroy()
 
 void EGameObject::SetIsEnable(bool enable)
 {
-    m_bIsEnable = enable;
+    _bIsEnable = enable;
 
-    for (const auto& child : m_Components)
+    for (const auto& child : _Components)
     {
         if (nullptr == child) continue;
-        child->SetIsEnable(m_bIsEnable);
+        child->SetIsEnable(_bIsEnable);
     }
 }

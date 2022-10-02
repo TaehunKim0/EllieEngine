@@ -1,16 +1,15 @@
 #pragma once
 #include<list>
-#include "EObject.h"
 
 class EComponent;
-class EGameObject : public EObject
+class EGameObject
 {
 public:
 	EGameObject();
 	~EGameObject();
 
 	virtual void Begin();
-	virtual void Tick();
+	virtual void Update();
 
 	virtual void Excute();
 	virtual void Destroy();
@@ -39,20 +38,20 @@ public:
 	bool InitializeComponent();
 
 private:
-	bool m_bIsPendingKill;
-	bool m_bIsEnable;
+	bool _bIsPendingKill;
+	bool _bIsEnable;
 
 private:
-	std::list<EGameObject*> m_Children;
-	EGameObject* m_Parent = nullptr;
+	std::list<EGameObject*> _Children;
+	EGameObject* _Parent = nullptr;
 
-	std::list<EComponent*> m_Components;
+	std::list<EComponent*> _Components;
 };
 
 template<class T>
 inline T* EGameObject::GetComponent()
 {
-	for (const auto component : m_Components)
+	for (const auto component : _Components)
 	{
 		if (nullptr == component) continue;
 		if (dynamic_cast<T*>(component)) //업캐스팅 허용 (업캐스팅 : 자식 클래스의 객체가 부모 클래스 타입으로 형변환 되는 것)

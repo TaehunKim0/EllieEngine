@@ -123,8 +123,8 @@ namespace WindowsApp
 
 #pragma endregion
 
-#pragma region Tick
-	FORCEINLINE void Tick()
+#pragma region Update
+	FORCEINLINE void Update()
 	{
 		MSG msg;
 		bool done = false;
@@ -148,8 +148,8 @@ namespace WindowsApp
 			{
 				DX11.BeginScene(0.0f, 0.0f, 0.0f, 1.f);
 
-				CORE.GetCore(CameraMgr)->Tick();
 				CORE.GetCore(SceneMgr)->Tick();
+				//CORE.GetCore(CameraMgr)->Update();
 
 				DX11.EndScene();
 			}

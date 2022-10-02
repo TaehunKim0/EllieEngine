@@ -8,10 +8,10 @@ void GameObjectMgr::Init()
 
 void GameObjectMgr::Tick()
 {
-    auto iterator = m_Objects.begin();
-    while (iterator != m_Objects.end())
+    auto iterator = _Objects.begin();
+    while (iterator != _Objects.end())
     {
-        iterator->Tick();
+        iterator->Update();
         ++iterator;
 
         //만약 오브젝트가 삭제되어야 한다면 삭제한다.

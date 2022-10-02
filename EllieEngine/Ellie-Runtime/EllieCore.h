@@ -26,9 +26,9 @@ class SceneMgr;
 class EllieCore : public Singleton<EllieCore>
 {
 public:
-    CREATE_GETCORE_FUNCTION(GameObjectMgr, m_GameObjectMgr);
-    CREATE_GETCORE_FUNCTION(CameraMgr, m_CameraMgr);
-    CREATE_GETCORE_FUNCTION(SceneMgr, m_SceneMgr);
+    CREATE_GETCORE_FUNCTION(GameObjectMgr, _GameObjectMgr);
+    CREATE_GETCORE_FUNCTION(CameraMgr, _CameraMgr);
+    CREATE_GETCORE_FUNCTION(SceneMgr, _SceneMgr);
 
     void CreateCores();
     void Init();
@@ -36,8 +36,8 @@ public:
     void Excute();
 
 private:
-    std::vector<IManager*> m_Managers;
-    GameObjectMgr* m_GameObjectMgr = nullptr;
-    CameraMgr* m_CameraMgr = nullptr;
-    SceneMgr* m_SceneMgr = nullptr;
+    std::vector<IManager*> _Managers;
+    GameObjectMgr* _GameObjectMgr = nullptr;
+    CameraMgr* _CameraMgr = nullptr;
+    SceneMgr* _SceneMgr = nullptr;
 };

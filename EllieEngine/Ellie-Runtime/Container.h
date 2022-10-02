@@ -6,24 +6,24 @@ template<class T>
 class Container
 {
 public:
-	std::list<T> m_Objects;
-    int m_Size = 0;
+	std::list<T> _Objects;
+    int _Size = 0;
 
 public:
     Container() = default;
     ~Container() {}
 
     virtual void Register(T object) {
-        m_Objects.push_back(object);
-        m_Size++;
+        _Objects.push_back(object);
+        _Size++;
     }
 
   /*  virtual void Remove(T object) {
-        m_Objects.remove(object);
-        m_Size--;
+        _Objects.remove(object);
+        _Size--;
     }*/
 
     int GetSize() {
-        return m_Size;
+        return _Size;
     }
 };

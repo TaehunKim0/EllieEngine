@@ -2,9 +2,9 @@
 #include "ESprite.h"
 
 ESprite::ESprite()
-	: m_Texture(0),
-	m_SampleState(0),
-	m_TransformComponent(nullptr)
+	: _Texture(0),
+	_SampleState(0),
+	_TransformComponent()
 {
 }
 
@@ -16,14 +16,14 @@ void ESprite::Begin()
 {
 }
 
-void ESprite::Tick()
+void ESprite::Update()
 {
 }
 
 bool ESprite::CreateTexture(ID3D11Device* g_pDevice, const WCHAR* path)
 {
-	m_Texture = new ETexture();
-	m_Texture->LoadTexture(g_pDevice, path);
+	_Texture = new ETexture();
+	_Texture->LoadTexture(g_pDevice, path);
 
 	D3D11_SAMPLER_DESC samplerDesc;
 	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
@@ -40,7 +40,7 @@ bool ESprite::CreateTexture(ID3D11Device* g_pDevice, const WCHAR* path)
 	samplerDesc.MinLOD = 0;
 	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
-	HRESULT hr = DX11.GetDevice()->CreateSamplerState(&samplerDesc, &m_SampleState);
+	HRESULT hr = DX11.GetDevice()->CreateSamplerState(&samplerDesc, &_SampleState);
 	if (FAILED(hr)) return false;
 
 	return true;
@@ -48,9 +48,9 @@ bool ESprite::CreateTexture(ID3D11Device* g_pDevice, const WCHAR* path)
 
 void ESprite::Excute()
 {
-	m_TransformComponent->Excute();
-	m_Texture->Excute();
-	SAFE_RELEASE(m_SampleState);
+	_TransformComponent.Excute();
+	_Texture->Excute();
+	SAFE_RELEASE(_SampleState);
 }
 
 void ESprite::Destroy()

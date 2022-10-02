@@ -16,5 +16,5 @@ public:
 	EScene* GetCurrentScene() const;
 
 private:
-	EScene* m_Scene;
+	EScene* _Scene;
 };

@@ -3,8 +3,8 @@
 
 void CameraMgr::Init()
 {
-	m_Position = Vec3(0.0f,0.0f,-10.f);
-	m_Rotation = Vec3(0.0f,0.0f,0.0f);
+	_Position = Vec3(0.0f,0.0f,-10.f);
+	_Rotation = Vec3(0.0f,0.0f,0.0f);
 }
 
 void CameraMgr::Tick()
@@ -18,25 +18,25 @@ void CameraMgr::Excute()
 
 void CameraMgr::SetPosition(float x, float y, float z)
 {
-	m_Position = Vec3(x, y, z);
+	_Position = Vec3(x, y, z);
 	return;
 }
 
 void CameraMgr::SetRotation(float x, float y, float z)
 {
-	m_Rotation = Vec3(x, y, z);
+	_Rotation = Vec3(x, y, z);
 	return;
 }
 
 void CameraMgr::GetPosition(Vec3& pos)
 {
-	pos = m_Position;
+	pos = _Position;
 	return;
 }
 
 void CameraMgr::GetRotation(Vec3& rot)
 {
-	m_Rotation = rot;
+	_Rotation = rot;
 	return;
 }
 
@@ -50,9 +50,9 @@ void CameraMgr::Render()
 	//up.y = 1.0f;
 	//up.z = 0.0f;
 
-	//position.x = m_Position.x;
-	//position.y = m_Position.y;
-	//position.z = m_Position.z;
+	//position.x = _Position.x;
+	//position.y = _Position.y;
+	//position.z = _Position.z;
 
 	//lookAt.x = 0.0f;
 	//lookAt.y = 0.0f;
@@ -61,9 +61,9 @@ void CameraMgr::Render()
 	////ex) 60 * 파이/180 = 1/3 파이
 	////ex) 60 * 0.0174532925f = 1.04719755f(60도)
 	////위의 두 식은 같다.
-	//pitch = m_Rotation.y * 0.0174532925f; //일반적인 오일러각을 라디안으로 바꾼다. = D3DXToRadian
-	//yaw = m_Rotation.x * 0.0174532925f;
-	//roll = m_Rotation.z * 0.0174532925f;
+	//pitch = _Rotation.y * 0.0174532925f; //일반적인 오일러각을 라디안으로 바꾼다. = D3DXToRadian
+	//yaw = _Rotation.x * 0.0174532925f;
+	//roll = _Rotation.z * 0.0174532925f;
 
 	//rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(yaw, pitch, roll);
 
@@ -77,7 +77,7 @@ void CameraMgr::Render()
 	//lookAtVector = XMVectorAdd(XMLoadFloat3(&position), lookAtVector);
 
 	////마지막으로 업데이트 된 세 벡터에서 뷰 행렬을 만듭니다.
-	//m_ViewMatrix = DirectX::XMMatrixLookAtLH(XMLoadFloat3(&position), lookAtVector, upVector);
+	//_ViewMatrix = DirectX::XMMatrixLookAtLH(XMLoadFloat3(&position), lookAtVector, upVector);
 
 	XMFLOAT3 up, position, lookAt;
 	float yaw, pitch, roll;
@@ -89,9 +89,9 @@ void CameraMgr::Render()
 	up.z = 0.0f;
 
 	// Setup the position of the camera in the world.
-	position.x = m_Position.x;
-	position.y = m_Position.y;
-	position.z = m_Position.z;
+	position.x = _Position.x;
+	position.y = _Position.y;
+	position.z = _Position.z;
 
 	// Setup where the camera is looking by default.
 	lookAt.x = 0.0f;
@@ -99,9 +99,9 @@ void CameraMgr::Render()
 	lookAt.z = 1.0f;
 
 	// Set the yaw (Y axis), pitch (X axis), and roll (Z axis) rotations in radians.
-	pitch = m_Rotation.y * 0.0174532925f;
-	yaw = m_Rotation.x * 0.0174532925f;
-	roll = m_Rotation.z * 0.0174532925f;
+	pitch = _Rotation.y * 0.0174532925f;
+	yaw = _Rotation.x * 0.0174532925f;
+	roll = _Rotation.z * 0.0174532925f;
 
 	// Create the rotation matrix from the yaw, pitch, and roll values.
 	//D3DXMatrixRotationYawPitchRoll(&rotationMatrix, yaw, pitch, roll);
@@ -119,15 +119,15 @@ void CameraMgr::Render()
 	lookAtVector = XMVectorAdd(XMLoadFloat3(&position), lookAtVector);
 
 	// Finally create the view matrix from the three updated vectors.
-	//D3DXMatrixLookAtLH(&m_viewMatrix, &position, &lookAt, &up);
-	m_ViewMatrix = DirectX::XMMatrixLookAtLH(XMLoadFloat3(&position), lookAtVector, upVector);
+	//D3DXMatrixLookAtLH(&_viewMatrix, &position, &lookAt, &up);
+	_ViewMatrix = DirectX::XMMatrixLookAtLH(XMLoadFloat3(&position), lookAtVector, upVector);
 
 	GenerateBaseViewMatrix();
 }
 
 void CameraMgr::GetViewMatrix(Mat4x4& outviewMatrix)
 {
-	outviewMatrix = m_ViewMatrix;
+	outviewMatrix = _ViewMatrix;
 	return;
 }
 
@@ -140,23 +140,23 @@ void CameraMgr::GenerateBaseViewMatrix()
 	up.y = 1.0f;
 	up.z = 0.0f;
 
-	position.x = m_Position.x;
-	position.y = m_Position.y;
-	position.z = m_Position.z;
+	position.x = _Position.x;
+	position.y = _Position.y;
+	position.z = _Position.z;
 
-	radians = m_Rotation.y * 0.0174532925f;
+	radians = _Rotation.y * 0.0174532925f;
 
-	lookAt.x = sinf(radians) + m_Position.x;
-	lookAt.y = m_Position.y;
-	lookAt.z = cosf(radians) + m_Position.z;
+	lookAt.x = sinf(radians) + _Position.x;
+	lookAt.y = _Position.y;
+	lookAt.z = cosf(radians) + _Position.z;
 
-	m_BaseViewMatrix = XMMatrixLookAtLH(XMLoadFloat3(&position), XMLoadFloat3(&lookAt), XMLoadFloat3(&up));
+	_BaseViewMatrix = XMMatrixLookAtLH(XMLoadFloat3(&position), XMLoadFloat3(&lookAt), XMLoadFloat3(&up));
 	return;
 }
 
 
 void CameraMgr::GetBaseViewMatrix(Mat4x4& outViewMatrix)
 {
-	outViewMatrix = m_ViewMatrix;
+	outViewMatrix = _ViewMatrix;
 	return;
 }
