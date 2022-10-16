@@ -1,7 +1,7 @@
 #pragma once
-#include "IManager.h"
-#include "Container.h"
-#include "EGameObject.h"
+#include "IManager.hpp"
+#include "Container.hpp"
+#include "EGameObject.hpp"
 
 class GameObjectMgr : public IManager , public Container<EGameObject>
 {

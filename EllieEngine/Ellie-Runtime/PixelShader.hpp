@@ -1,7 +1,7 @@
 #pragma once
-#include "Dx11.h"
-#include "EShader.h"
-#include "ETexture.h"
+#include "Dx11.hpp"
+#include "EShader.hpp"
+#include "ETexture.hpp"
 
 class PixelShader : public EShader
 {
@@ -30,4 +30,3 @@ private:
 	std::vector<ETexture> _Textures;
 	ComPtr<ID3D11SamplerState> _SamplerState;
 };
-

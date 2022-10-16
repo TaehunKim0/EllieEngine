@@ -1,5 +1,5 @@
 #pragma once
-#include "Precompiled.h"
+#include "Precompiled.hpp"
 namespace Math
 {
 	typedef XMFLOAT2 Vector2;

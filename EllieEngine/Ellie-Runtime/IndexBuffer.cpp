@@ -1,5 +1,5 @@
-#include "Precompiled.h"
-#include "IndexBuffer.h"
+#include "Precompiled.hpp"
+#include "IndexBuffer.hpp"
 
 bool IndexBuffer::Initialize(ID3D11Device* device, void* data, int count)
 {

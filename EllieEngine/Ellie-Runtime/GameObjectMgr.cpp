@@ -1,5 +1,5 @@
-#include "Precompiled.h"
-#include "GameObjectMgr.h"
+#include "Precompiled.hpp"
+#include "GameObjectMgr.hpp"
 
 void GameObjectMgr::Init()
 {

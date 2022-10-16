@@ -1,5 +1,5 @@
-#include "Precompiled.h"
-#include "ESprite.h"
+#include "Precompiled.hpp"
+#include "ESprite.hpp"
 
 ESprite::ESprite()
 	: _Texture(0),

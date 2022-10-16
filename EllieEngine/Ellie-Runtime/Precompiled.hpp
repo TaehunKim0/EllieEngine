@@ -22,7 +22,7 @@ using namespace DirectX;
 using Microsoft::WRL::ComPtr;
 
 //*Custom Class*//
-#include "Dx11.h"
-#include "EllieCore.h"
-#include "MathHeaders.h"
-#include "MacroDef.h"
+#include "Dx11.hpp"
+#include "EllieCore.hpp"
+#include "MathHeaders.hpp"
+#include "MacroDef.hpp"

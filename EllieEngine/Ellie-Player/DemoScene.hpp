@@ -1,6 +1,6 @@
 #pragma once
-#include "EScene.h"
-#include "TriangleMesh.h"
+#include "EScene.hpp"
+#include "TriangleMesh.hpp"
 
 class DemoScene : public EScene
 {

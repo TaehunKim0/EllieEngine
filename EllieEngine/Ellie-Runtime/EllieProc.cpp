@@ -1,6 +1,6 @@
-#include "Precompiled.h"
-#include "EllieProc.h"
-#include "EllieCore.h"
+#include "Precompiled.hpp"
+#include "EllieProc.hpp"
+#include "EllieCore.hpp"
 
 void EllieProc::Init()
 {

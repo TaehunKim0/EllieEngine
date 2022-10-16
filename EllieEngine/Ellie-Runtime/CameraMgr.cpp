@@ -1,5 +1,5 @@
-#include "Precompiled.h"
-#include "CameraMgr.h"
+#include "Precompiled.hpp"
+#include "CameraMgr.hpp"
 
 void CameraMgr::Init()
 {

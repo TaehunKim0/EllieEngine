@@ -1,5 +1,5 @@
-#include "Precompiled.h"
-#include "InputLayout.h"
+#include "Precompiled.hpp"
+#include "InputLayout.hpp"
 
 bool InputLayout::Initialize(ID3D11Device* device, D3D11_INPUT_ELEMENT_DESC* layout, int count, ID3DBlob* vertexShaderBuffer)
 {

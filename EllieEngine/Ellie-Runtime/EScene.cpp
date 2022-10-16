@@ -1,2 +1,2 @@
-#include "Precompiled.h"
-#include "EScene.h"
+#include "Precompiled.hpp"
+#include "EScene.hpp"

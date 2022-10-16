@@ -1,6 +1,6 @@
 #pragma once
-#include "EComponent.h"
-#include "Rotator.h"
+#include "EComponent.hpp"
+#include "Rotator.hpp"
 
 class ETransformComponent : public EComponent
 {

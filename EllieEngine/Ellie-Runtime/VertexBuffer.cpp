@@ -1,5 +1,5 @@
-#include "Precompiled.h"
-#include "VertexBuffer.h"
+#include "Precompiled.hpp"
+#include "VertexBuffer.hpp"
 
 bool VertexBuffer::Initialize(ID3D11Device* device, void* data, int count, int elementByteWidth)
 {

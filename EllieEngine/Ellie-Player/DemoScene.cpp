@@ -1,7 +1,6 @@
-#include "Precompiled.h"
-#include "DemoScene.h"
-#include "ESprite.h"
-#include "SpriteRendererComponent.h"
+#include "Precompiled.hpp"
+#include "DemoScene.hpp"
+#include "ESprite.hpp"
 
 void DemoScene::Init()
 {

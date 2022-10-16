@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EShader.h"
+#include "EShader.hpp"
 
 class VertexShader : public EShader
 {

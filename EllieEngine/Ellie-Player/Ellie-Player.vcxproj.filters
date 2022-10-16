@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <FxCompile Include="ColorPS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="ColorVS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Shader">
       <UniqueIdentifier>{0bc88dbb-2b03-4277-b7ac-eab981978305}</UniqueIdentifier>
     </Filter>
@@ -26,18 +18,15 @@
     <ClCompile Include="DemoScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="DemoObject.cpp">
-      <Filter>Scene</Filter>
+    <ClCompile Include="EShader.cpp">
+      <Filter>Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WindowsApp.h">
+    <ClInclude Include="WindowsApp.hpp">
       <Filter>WindowsApp</Filter>
     </ClInclude>
-    <ClInclude Include="DemoScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="DemoObject.h">
+    <ClInclude Include="DemoScene.hpp">
       <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>

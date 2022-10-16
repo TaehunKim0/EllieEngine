@@ -1,5 +1,5 @@
 #pragma once
-#include "Singleton.h"
+#include "Singleton.hpp"
 /*
 Manager 들을 가지고 있는 Core 클래스
 Manager들을 List에 추가하고,

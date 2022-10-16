@@ -1,7 +1,7 @@
 #pragma once
-#include "IManager.h"
-#include "Matrix.h"
-#include "Vector.h"
+#include "IManager.hpp"
+#include "Matrix.hpp"
+#include "Vector.hpp"
 
 class CameraMgr : public IManager
 {

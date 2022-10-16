@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Singleton.h"
-#include "Matrix.h"
+#include "Singleton.hpp"
+#include "Matrix.hpp"
 #define DX11 Dx11::GetInstance()
 
 class Dx11 : public Singleton<Dx11>

@@ -1,10 +1,10 @@
-#include "Precompiled.h"
-#include "EllieCore.h"
+#include "Precompiled.hpp"
+#include "EllieCore.hpp"
 
-#include "IManager.h"
-#include "GameObjectMgr.h"
-#include "CameraMgr.h"
-#include "SceneMgr.h"
+#include "IManager.hpp"
+#include "GameObjectMgr.hpp"
+#include "CameraMgr.hpp"
+#include "SceneMgr.hpp"
 
 void EllieCore::CreateCores()
 {

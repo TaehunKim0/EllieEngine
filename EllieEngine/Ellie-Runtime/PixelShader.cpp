@@ -1,5 +1,5 @@
-#include "Precompiled.h"
-#include "PixelShader.h"
+#include "Precompiled.hpp"
+#include "PixelShader.hpp"
 
 PixelShader::PixelShader()
     : EShader()
@@ -120,6 +120,7 @@ bool PixelShader::LoadTexture(ID3D11Device* device, std::wstring filename)
     _Textures.push_back(texture);
 
     return true;*/
+    return true;
 }
 
 void PixelShader::BindTextures(ID3D11DeviceContext* deviceContext)

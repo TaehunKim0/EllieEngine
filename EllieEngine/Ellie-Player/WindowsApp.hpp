@@ -1,10 +1,10 @@
 #pragma once
-#include "Precompiled.h"
-#include "EllieProc.h"
-#include "Dx11.h"
-#include "DemoScene.h"
-#include "SceneMgr.h"
-#include "CameraMgr.h"
+#include "Precompiled.hpp"
+#include "EllieProc.hpp"
+#include "Dx11.hpp"
+#include "DemoScene.hpp"
+#include "SceneMgr.hpp"
+#include "CameraMgr.hpp"
 
 struct ScreenPoint {
 	ScreenPoint(const int& InX, const int& InY)

@@ -1,6 +1,5 @@
-#include "Precompiled.h"
-
-#include "TransformBuffer.h"
+#include "Precompiled.hpp"
+#include "TransformBuffer.hpp"
 
 bool TransformBuffer::Create(ID3D11Device* device, Mat4x4 InMatrix)
 {

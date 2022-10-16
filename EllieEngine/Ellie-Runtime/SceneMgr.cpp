@@ -1,5 +1,5 @@
-#include "Precompiled.h"
-#include "SceneMgr.h"
+#include "Precompiled.hpp"
+#include "SceneMgr.hpp"
 
 void SceneMgr::Init()
 {

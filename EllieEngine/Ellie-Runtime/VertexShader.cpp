@@ -1,5 +1,5 @@
-#include "Precompiled.h"
-#include "VertexShader.h"
+#include "Precompiled.hpp"
+#include "VertexShader.hpp"
 
 VertexShader::VertexShader()
     : EShader()

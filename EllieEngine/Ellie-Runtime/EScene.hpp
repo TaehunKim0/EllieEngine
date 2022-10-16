@@ -1,5 +1,5 @@
 #pragma once
-#include "EGameObject.h"
+#include "EGameObject.hpp"
 
 class EScene : public EGameObject
 {

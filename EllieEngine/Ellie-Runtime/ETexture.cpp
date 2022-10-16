@@ -1,5 +1,5 @@
-#include "Precompiled.h"
-#include "ETexture.h"
+#include "Precompiled.hpp"
+#include "ETexture.hpp"
 
 ETexture::ETexture()
     : _ImageInfo({0,})

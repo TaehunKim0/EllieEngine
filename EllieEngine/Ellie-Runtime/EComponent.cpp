@@ -1,2 +1,2 @@
-#include "Precompiled.h"
-#include "EComponent.h"
+#include "Precompiled.hpp"
+#include "EComponent.hpp"

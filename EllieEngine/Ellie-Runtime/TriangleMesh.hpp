@@ -1,11 +1,11 @@
 #pragma once
-#include "EMesh.h"
+#include "EMesh.hpp"
 
 class TriangleMesh : public EMesh
 {
 public:
-	TriangleMesh(){}
-	virtual ~TriangleMesh(){}
+	TriangleMesh();
+	virtual ~TriangleMesh();
 	struct Vertex { float x; float y; float z; };
 
 public:

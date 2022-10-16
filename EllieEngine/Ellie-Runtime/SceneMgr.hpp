@@ -1,8 +1,8 @@
 #pragma once
 
-#include "IManager.h"
-#include "EScene.h"
-#include "EllieCore.h"
+#include "IManager.hpp"
+#include "EScene.hpp"
+#include "EllieCore.hpp"
 
 class SceneMgr : public IManager
 {

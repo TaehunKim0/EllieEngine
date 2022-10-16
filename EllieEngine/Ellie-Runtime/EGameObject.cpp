@@ -1,6 +1,6 @@
-#include "Precompiled.h"
-#include "EGameObject.h"
-#include "EComponent.h"
+#include "Precompiled.hpp"
+#include "EGameObject.hpp"
+#include "EComponent.hpp"
 
 
 EGameObject::EGameObject()

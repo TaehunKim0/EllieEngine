@@ -93,7 +93,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>Precompiled.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>Precompiled.hpp</PrecompiledHeaderFile>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -151,37 +151,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CameraMgr.h" />
-    <ClInclude Include="Container.h" />
-    <ClInclude Include="Dx11.h" />
-    <ClInclude Include="EComponent.h" />
-    <ClInclude Include="EGameObject.h" />
-    <ClInclude Include="EllieCore.h" />
-    <ClInclude Include="EllieProc.h" />
-    <ClInclude Include="EScene.h" />
-    <ClInclude Include="ESprite.h" />
-    <ClInclude Include="ETexture.h" />
-    <ClInclude Include="GameObjectMgr.h" />
-    <ClInclude Include="IManager.h" />
-    <ClInclude Include="IndexBuffer.h" />
-    <ClInclude Include="InputLayout.h" />
-    <ClInclude Include="MacroDef.h" />
-    <ClInclude Include="MathHeaders.h" />
-    <ClInclude Include="Matrix.h" />
-    <ClInclude Include="EMesh.h" />
-    <ClInclude Include="Precompiled.h" />
-    <ClInclude Include="Rotator.h" />
-    <ClInclude Include="SceneMgr.h" />
-    <ClInclude Include="Singleton.h" />
-    <ClInclude Include="SpriteRendererComponent.h" />
-    <ClInclude Include="TransformBuffer.h" />
-    <ClInclude Include="TransformComponent.h" />
-    <ClInclude Include="TriangleMesh.h" />
-    <ClInclude Include="Vector.h" />
-    <ClInclude Include="VertexBuffer.h" />
+    <ClInclude Include="CameraMgr.hpp" />
+    <ClInclude Include="ColorShader.h" />
+    <ClInclude Include="Container.hpp" />
+    <ClInclude Include="Dx11.hpp" />
+    <ClInclude Include="EComponent.hpp" />
+    <ClInclude Include="EGameObject.hpp" />
+    <ClInclude Include="EllieCore.hpp" />
+    <ClInclude Include="EllieProc.hpp" />
+    <ClInclude Include="EScene.hpp" />
+    <ClInclude Include="EShader.hpp" />
+    <ClInclude Include="ESprite.hpp" />
+    <ClInclude Include="ETexture.hpp" />
+    <ClInclude Include="GameObjectMgr.hpp" />
+    <ClInclude Include="IManager.hpp" />
+    <ClInclude Include="IndexBuffer.hpp" />
+    <ClInclude Include="InputLayout.hpp" />
+    <ClInclude Include="MacroDef.hpp" />
+    <ClInclude Include="MathHeaders.hpp" />
+    <ClInclude Include="Matrix.hpp" />
+    <ClInclude Include="EMesh.hpp" />
+    <ClInclude Include="PixelShader.hpp" />
+    <ClInclude Include="Precompiled.hpp" />
+    <ClInclude Include="Rotator.hpp" />
+    <ClInclude Include="SceneMgr.hpp" />
+    <ClInclude Include="Singleton.hpp" />
+    <ClInclude Include="TransformBuffer.hpp" />
+    <ClInclude Include="TransformComponent.hpp" />
+    <ClInclude Include="TriangleMesh.hpp" />
+    <ClInclude Include="Vector.hpp" />
+    <ClInclude Include="VertexBuffer.hpp" />
+    <ClInclude Include="VertexShader.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CameraMgr.cpp" />
+    <ClCompile Include="ColorShader.cpp" />
     <ClCompile Include="Dx11.cpp" />
     <ClCompile Include="EComponent.cpp" />
     <ClCompile Include="EGameObject.cpp" />
@@ -196,14 +200,33 @@
     <ClCompile Include="GameObjectMgr.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputLayout.cpp" />
+    <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="Precompiled.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SceneMgr.cpp" />
-    <ClCompile Include="SpriteRendererComponent.cpp" />
     <ClCompile Include="TransformBuffer.cpp" />
     <ClCompile Include="TriangleMesh.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
+    <ClCompile Include="VertexShader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Ellie-Player\ColorPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">4.0_level_9_3</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0_level_9_3</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">4.0_level_9_3</ShaderModel>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0_level_9_3</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="..\Ellie-Player\ColorVS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

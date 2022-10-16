@@ -1,5 +1,5 @@
-#include "Precompiled.h"
-#include "TriangleMesh.h"
+#include "Precompiled.hpp"
+#include "TriangleMesh.hpp"
 
 TriangleMesh::TriangleMesh()
 {
