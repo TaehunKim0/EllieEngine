@@ -10,7 +10,6 @@ public:
 		float screenDepth, float screenNear);
 	bool Resize();
 
-	int Rendering();
 	void BeginScene(float red, float green, float blue, float alpha);
 	void EndScene();
 

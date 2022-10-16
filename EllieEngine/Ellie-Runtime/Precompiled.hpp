@@ -15,8 +15,7 @@
 using namespace DirectX;
 
 //*Custom Class*//
-#include "Dx11.h"
-
+#include "Dx11.hpp"
 
 //*Custom Define*//
 template<class T>

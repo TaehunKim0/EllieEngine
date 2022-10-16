@@ -1,4 +1,4 @@
-#include "Precompiled.h"
+#include "Precompiled.hpp"
 
 Dx11::Dx11()
 {
@@ -160,15 +160,6 @@ bool Dx11::Resize()
 	return true;
 }
 
-int Dx11::Rendering()
-{
-	BeginScene(0.f,0.f,1.f,1.f);
-
-	//Render
-
-	EndScene();
-	return 0;
-}
 
 void Dx11::BeginScene(float red, float green, float blue, float alpha)
 {

@@ -1,4 +1,6 @@
 #pragma once
+#include "Engine.hpp"
+
 struct ScreenPoint {
 	ScreenPoint(const int& InX, const int& InY)
 	{
@@ -16,6 +18,7 @@ namespace WindowsApp
 	static ScreenPoint g_ScreenSize(0,0);
 	static TCHAR g_Title[64] = _T("Ellie Engine");
 	Dx11* m_Dx11;
+	Engine _Engine;
 
 #pragma region WndProc
 	LRESULT CALLBACK WndProc(HWND hwnd, UINT32 msg, WPARAM wParam, LPARAM lParam)
@@ -103,6 +106,13 @@ namespace WindowsApp
 			return false;
 		}
 
+		//*Scene Init*//
+		if (_Engine.InitializeScene() == false)
+		{
+			::MessageBox(nullptr, _T("Scene Init failed!"), _T("Error!"), MB_ICONEXCLAMATION | MB_OK);
+			return false;
+		}
+
 		return true;
 	}
 
@@ -131,10 +141,12 @@ namespace WindowsApp
 			}
 			else
 			{
-				//m_Dx11->BeginScene(0.f,0.f,1.f,1.f);
-				//Game Update , Render
-				m_Dx11->Rendering();
-				//m_Dx11->EndScene();
+				m_Dx11->BeginScene(0.f,0.f,1.f,1.f);
+
+				_Engine.Update();
+				_Engine.DrawScene();
+
+				m_Dx11->EndScene();
 			}
 		}
 	}
